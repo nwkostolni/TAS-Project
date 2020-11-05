@@ -5,7 +5,7 @@ namespace TAS_Project.Database
 {
     public class ReadSurveyData : IReadSurveyData
     {
-        public List<Survey> GetAllSurveys(){
+            public List<Survey> GetAllSurveys(){
             string cs =@"URI=file:C:\Users\snibb\source\repos\MIS321\TAS-Project\Database\survey.db";
             using var con = new SQLiteConnection(cs);
            con.Open();

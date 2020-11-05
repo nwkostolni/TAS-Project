@@ -1,0 +1,4 @@
+C:\Users\hnnhp\source\repos\MIS 321\TAS-Project\obj\Debug\netcoreapp3.1\TASProject.csprojAssemblyReference.cache
+C:\Users\hnnhp\source\repos\MIS 321\TAS-Project\obj\Debug\netcoreapp3.1\TASProject.AssemblyInfoInputs.cache
+C:\Users\hnnhp\source\repos\MIS 321\TAS-Project\obj\Debug\netcoreapp3.1\TASProject.AssemblyInfo.cs
+C:\Users\hnnhp\source\repos\MIS 321\TAS-Project\obj\Debug\netcoreapp3.1\TASProject.csproj.CoreCompileInputs.cache
