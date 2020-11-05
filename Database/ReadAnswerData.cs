@@ -1,13 +1,10 @@
-using System.Threading;
-using System.Xml.Linq;
-using System.Security.Cryptography;
-
 namespace TAS_Project.Database
 {
-    public class ReadEmpData : IReadEmpData
+    public class ReadAnswerData
     {
-        public List<Employee> GetAllEmployees(){
-            List<Employee> allEmployees = new List<Employee>();
+        public List<Answers> GetAllAnswers()
+        {
+            List <Answers> allAnswers = new List<Answers>();
             string cs;
             try
             {
@@ -18,28 +15,30 @@ namespace TAS_Project.Database
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Something went wrong.....returning blank list. {0}", e);
                 Console.ForegroundColor = ConsoleColor.White;
-                return allEmployees;
+                return allInputChoices;
             }
             using var con = new SQLiteConnection(cs);
             con.Open();
-
-            string stm = "SELECT * FROM Employee"; //Pulls the data from the table
+             string stm = "SELECT * FROM Answers"; //Pulls the data from the table
             using var cmd = new SQLiteCommand(stm, con);
 
             using SQLiteDataReader rdr = cmd.ExecuteReader();
             
             while(rdr.Read()){ //Reads in each new row of data
-                Employee temp= new Employee(){EmpId=rdr.GetInt32(0), EmpFirst=rdr.GetString(1), EmpLast=rdr.GetInt32(2), EmpEmail=rdr.GetString(3), EmpDep=rdr.GetString(4), EmpLvl=rdr.GetString(5), Admin=rdr.GetInt32(6), Password=rdr.GetString(7), MgrId=rdr.GetInt32(8)};
-                allEmployees.Add(temp);
+                Answers temp = new Answers(){AnsId=rdr.GetInt32(0), QstId=GetInt32(1),AnsNumeric =GetInt32(2) ,AnsText =GetInt32(3),InputChoiceId= GetInt32(4),SurveyId= GetInt32(5)};
+                allAnswers.Add(temp);
+                               
             }
-            return allEmployees; //Returns a list containing the data from the database
-        }
+            return allAnswers;
 
-        public Employee GetEmployee(int EmpId){
+
+        }
+        public Answer GetAnswer(int AnsId)
+        {
             string cs;
             try
             {
-                cs =@"URI=file:C:\Users\hnnhp\source\repos\MIS 321\TAS-Project\Database\TAS.db"; 
+                cs =@"URI=file:C:\Users\hnnhp\source\repos\MIS 321\pa4-hdpetty-1\API\Models\posts.db"; //NEEDS TO BE UPDATED
             }
             catch (FileNotFoundException e) //Error Check
             {
@@ -51,14 +50,15 @@ namespace TAS_Project.Database
             using var con=new SQLiteConnection(cs);
             con.Open();
 
-            string stm= "SELECT * FROM Employee WHERE EmployeeId=@id";
+            string stm= "SELECT * FROM InputChoices WHERE AnsId=@id";
             using var cmd=new SQLiteCommand(stm, con);
-            cmd.Parameters.AddWithValue("@id", EmpId);
+            cmd.Parameters.AddWithValue("@id", ansId);
             cmd.Prepare();
             using SQLiteDataReader reader=cmd.ExecuteReader();
 
             reader.Read();
-            return new Employee(){EmpId=rdr.GetInt32(0), EmpFirst=rdr.GetString(1), EmpLast=rdr.GetInt32(2), EmpEmail=rdr.GetString(3), EmpDep=rdr.GetString(4), EmpLvl=rdr.GetString(5), Admin=rdr.GetInt32(6), Password=rdr.GetString(7), MgrId=rdr.GetInt32(8)};
+            return new Answer(){AnsId=rdr.GetInt32(0), QstId=GetInt32(1),AnsNumeric =GetInt32(2) ,AnsText =GetInt32(3),InputChoiceId= GetInt32(4),SurveyId= GetInt32(5)};
         }
+        
     }
 }

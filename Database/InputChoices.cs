@@ -12,12 +12,5 @@ namespace TAS_Project.Database
         {
 
         }
-
-
-
-        public SaveInputChoice()
-        {
-            
-        }
     }
 }

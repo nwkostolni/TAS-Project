@@ -16,22 +16,5 @@ namespace TAS_Project.Database
         public Survey(){
 
         }
-
-        public List<Question> CreateQuestionList(){ 
-    
-            List<Question> questions = (from p in context.Questions
-
-                                    join q in context.SurveyQuestionson p.ID equals q.QuestionID
-
-                                    where q.SurveyID == surveyid
-
-                                    select p).ToList();
-            foreach (Question q in questions)
-            {
-                Console.WriteLine(q)
-            }
-
-            
-        }  
     }
 }

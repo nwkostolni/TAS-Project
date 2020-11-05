@@ -7,7 +7,7 @@ namespace TAS_Project.Database
             string cs;
             try
             {
-                cs =@"URI=file:C:\Users\hnnhp\source\repos\MIS 321\pa4-hdpetty-1\API\Models\posts.db"; //NEEDS TO BE UPDATED
+                cs =@"URI=file:C:\Users\hnnhp\source\repos\MIS 321\TAS-Project\Database\TAS.db"; 
             }
             catch (FileNotFoundException e) //Error Check
             {

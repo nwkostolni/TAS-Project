@@ -13,11 +13,5 @@ namespace TAS_Project.Database
         public Question(){
 
         }
-        public void SetQuestionLevel(){
-            
-        }
-        public void ShowQuestion(){
-            
-        }
     }
 }
