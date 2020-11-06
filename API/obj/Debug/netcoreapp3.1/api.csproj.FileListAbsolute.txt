@@ -1,0 +1,5 @@
+C:\Users\hnnhp\source\repos\MIS 321\TAS-Project\api\obj\Debug\netcoreapp3.1\api.csprojAssemblyReference.cache
+C:\Users\hnnhp\source\repos\MIS 321\TAS-Project\api\obj\Debug\netcoreapp3.1\api.AssemblyInfoInputs.cache
+C:\Users\hnnhp\source\repos\MIS 321\TAS-Project\api\obj\Debug\netcoreapp3.1\api.AssemblyInfo.cs
+C:\Users\hnnhp\source\repos\MIS 321\TAS-Project\api\obj\Debug\netcoreapp3.1\api.csproj.CoreCompileInputs.cache
+C:\Users\hnnhp\source\repos\MIS 321\TAS-Project\api\obj\Debug\netcoreapp3.1\api.MvcApplicationPartsAssemblyInfo.cache
