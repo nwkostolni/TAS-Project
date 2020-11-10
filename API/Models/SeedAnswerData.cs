@@ -36,7 +36,7 @@ namespace TAS_Project.Models
             cmd.CommandText=@"INSERT INTO Answer(AnswerId, AnswerNumeric, AnswerText, SurveyId, InputChoiceId, QuestionId) VALUES(@AnswerId, @AnswerNumeric, @AnswerText, @SurveyId, @InputChoiceId, @QuestionId)";
             cmd.Parameters.AddWithValue("@AnswerId", "1"); 
             cmd.Parameters.AddWithValue("@AnswerNumeric", "5");
-            cmd.Parameters.AddWithValue("@AnswerText", "");
+            cmd.Parameters.AddWithValue("@AnswerText", null);
             cmd.Parameters.AddWithValue("@SurveyId", "1");
             cmd.Parameters.AddWithValue("@InputChoiceId", "5");
             cmd.Parameters.AddWithValue("@QuestionId", "1");

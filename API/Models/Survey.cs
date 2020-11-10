@@ -1,5 +1,5 @@
+using System.Security.AccessControl;
 using System;
-
 namespace TAS_Project.Models
 {
     public class Survey
@@ -10,7 +10,7 @@ namespace TAS_Project.Models
         public int SubjectEmpId {get;set;}
         public DateTime DateDue {get;set;}
         public bool BeenCompleted {get;set;}
-        public Nullable<DateTime> DateCompleted {get;set;}
+        public DateTime ? DateCompleted {get;set;}
  
         public Survey(){
 

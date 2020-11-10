@@ -28,9 +28,9 @@ namespace TAS_Project.Models
             cmd.CommandText=@"INSERT INTO Survey(SurveyId, Cycle, DateDue, BeenCompleted, DateCompleted, ReviewerEmpId, SubjectEmpId) VALUES(@SurveyId, @Cycle, @DateDue, @BeenCompleted, @DateCompleted, @ReviewerEmpId, @SubjectEmpId)";
             cmd.Parameters.AddWithValue("@SurveyId", survey.SurveyId); 
             cmd.Parameters.AddWithValue("@Cycle", survey.Cycle);
-            cmd.Parameters.AddWithValue("@DateDue", survey.DateDue); 
+            cmd.Parameters.AddWithValue("@DateDue", survey.DateDue); //needs to be converted from datetime to string
             cmd.Parameters.AddWithValue("@BeenCompleted", survey.BeenCompleted); 
-            cmd.Parameters.AddWithValue("@DateCompleted", survey.DateCompleted); 
+            cmd.Parameters.AddWithValue("@DateCompleted", survey.DateCompleted); //needs to be converted from datetime to string
             cmd.Parameters.AddWithValue("@ReviewerEmpId", survey.ReviewerEmpId); 
             cmd.Parameters.AddWithValue("@SubjectEmpId", survey.SubjectEmpId); 
             cmd.Prepare();

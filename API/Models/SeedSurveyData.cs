@@ -60,7 +60,7 @@ namespace TAS_Project.Models
             cmd.Parameters.AddWithValue("@Cycle", "Fall 2020");
             cmd.Parameters.AddWithValue("@DateDue", "2020-12-01 00:00:00.000"); 
             cmd.Parameters.AddWithValue("@BeenCompleted", "0"); 
-            cmd.Parameters.AddWithValue("@DateCompleted", ""); 
+            cmd.Parameters.AddWithValue("@DateCompleted", null); 
             cmd.Parameters.AddWithValue("@ReviewerEmpId", "15"); 
             cmd.Parameters.AddWithValue("@SubjectEmpId", "17"); 
             cmd.Prepare();
@@ -71,7 +71,7 @@ namespace TAS_Project.Models
             cmd.Parameters.AddWithValue("@Cycle", "Fall 2020");
             cmd.Parameters.AddWithValue("@DateDue", "2020-12-01 00:00:00.000"); 
             cmd.Parameters.AddWithValue("@BeenCompleted", "0"); 
-            cmd.Parameters.AddWithValue("@DateCompleted", ""); 
+            cmd.Parameters.AddWithValue("@DateCompleted", null); 
             cmd.Parameters.AddWithValue("@ReviewerEmpId", "10"); 
             cmd.Parameters.AddWithValue("@SubjectEmpId", "17"); 
             cmd.Prepare();
@@ -82,7 +82,7 @@ namespace TAS_Project.Models
             cmd.Parameters.AddWithValue("@Cycle", "Fall 2020");
             cmd.Parameters.AddWithValue("@DateDue", "2020-12-01 00:00:00.000"); 
             cmd.Parameters.AddWithValue("@BeenCompleted", "0"); 
-            cmd.Parameters.AddWithValue("@DateCompleted", ""); 
+            cmd.Parameters.AddWithValue("@DateCompleted", null); 
             cmd.Parameters.AddWithValue("@ReviewerEmpId", "8"); 
             cmd.Parameters.AddWithValue("@SubjectEmpId", "17"); 
             cmd.Prepare();

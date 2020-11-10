@@ -1,3 +1,10 @@
+using System.Runtime.Serialization;
+using System.Resources;
+using System.Runtime.InteropServices.WindowsRuntime;
+using System.Security.AccessControl;
+using System.ComponentModel.Design.Serialization;
+using System.Runtime.CompilerServices;
+using System.ComponentModel;
 using System.Threading;
 using System.Xml.Linq;
 using System.Security.Cryptography;
@@ -21,14 +28,14 @@ namespace TAS_Project.Models
             List<Survey> allSurveys = new List<Survey>();
            while(rdr.Read())
            {
-/*                 DateTime? tempDateCompleted;
-                if(rdr.GetDateTime(6) is null){
-                    tempDateCompleted=null;
+                DateTime ? temp = new DateTime();
+                if(rdr.IsDBNull(4)){
+                    temp=null;
                 }
                 else{
-                    tempDateCompleted=rdr.GetDateTime(6);
-                } */
-                allSurveys.Add(new Survey(){SurveyId = rdr.GetInt32(0), Cycle = rdr.GetString(1), ReviewerEmpId = rdr.GetInt32(2), SubjectEmpId = rdr.GetInt32(3), DateDue = DateTime.Parse(rdr.GetString(4)), BeenCompleted = rdr.GetBoolean(5), DateCompleted = DateTime.Parse(rdr.GetString(6))});
+                    temp=DateTime.Parse(rdr.GetString(4));
+                }
+                allSurveys.Add(new Survey(){SurveyId = rdr.GetInt32(0), Cycle = rdr.GetString(1), ReviewerEmpId = rdr.GetInt32(5), SubjectEmpId = rdr.GetInt32(6), DateDue = DateTime.Parse(rdr.GetString(2)), BeenCompleted = rdr.GetBoolean(3), DateCompleted=temp});
            }
            return allSurveys;
         }
@@ -45,7 +52,7 @@ namespace TAS_Project.Models
             cmd.Prepare();
             using SQLiteDataReader rdr = cmd.ExecuteReader();
             rdr.Read();
-            return new Survey(){SurveyId=rdr.GetInt32(0), Cycle =rdr.GetString(1), ReviewerEmpId=rdr.GetInt32(2), SubjectEmpId=rdr.GetInt32(3), DateDue=rdr.GetDateTime(4), BeenCompleted=rdr.GetBoolean(5),DateCompleted=rdr.GetDateTime(6),};
+            return new Survey(){SurveyId=rdr.GetInt32(0), Cycle =rdr.GetString(1), ReviewerEmpId=rdr.GetInt32(2), SubjectEmpId=rdr.GetInt32(3), DateDue = DateTime.Parse(rdr.GetString(4)), BeenCompleted=rdr.GetBoolean(5), DateCompleted = DateTime.Parse(rdr.GetString(6))};
         }
 
         

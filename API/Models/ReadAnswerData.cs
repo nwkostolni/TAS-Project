@@ -32,8 +32,17 @@ namespace TAS_Project.Models
             using SQLiteDataReader rdr = cmd.ExecuteReader();
             
             while(rdr.Read()){ //Reads in each new row of data
-                Answer temp = new Answer(){AnsId=rdr.GetInt32(0), AnsNumeric=rdr.GetInt32(1), AnsText=rdr.GetString(2), SurveyId=rdr.GetInt32(3), InputChoiceId=rdr.GetInt32(4), QstId=rdr.GetInt32(5)};
-                allAnswers.Add(temp);
+                int ? temp;
+                if(rdr.IsDBNull(1)){
+                    temp=null;
+                }
+                else{
+                    temp=rdr.GetInt32(1);
+                }
+
+                
+                Answer value = new Answer(){AnsId=rdr.GetInt32(0), AnsNumeric= temp, AnsText=rdr.GetString(2), SurveyId=rdr.GetInt32(3), InputChoiceId=rdr.GetInt32(4), QstId=rdr.GetInt32(5)};
+                allAnswers.Add(value);
             }
             return allAnswers;
 
