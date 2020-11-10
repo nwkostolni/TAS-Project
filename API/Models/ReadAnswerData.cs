@@ -39,9 +39,14 @@ namespace TAS_Project.Models
                 else{
                     temp=rdr.GetInt32(1);
                 }
-
-                
-                Answer value = new Answer(){AnsId=rdr.GetInt32(0), AnsNumeric= temp, AnsText=rdr.GetString(2), SurveyId=rdr.GetInt32(3), InputChoiceId=rdr.GetInt32(4), QstId=rdr.GetInt32(5)};
+                string ? temp2;
+                if(rdr.IsDBNull(2)){
+                    temp2=null;
+                }
+                else{
+                    temp2=rdr.GetString(2);
+                }
+                Answer value = new Answer(){AnsId=rdr.GetInt32(0), AnsNumeric= temp, AnsText=temp2, SurveyId=rdr.GetInt32(3), InputChoiceId=rdr.GetInt32(4), QstId=rdr.GetInt32(5)};
                 allAnswers.Add(value);
             }
             return allAnswers;
