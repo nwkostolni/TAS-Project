@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Add an Employee</title>
+        <title>Assign a Survey</title>
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
     </head>
@@ -20,64 +20,39 @@
                                 <div class="card shadow-lg border-0 rounded-lg mt-5 mb-5">
                                     <div class="card-header">
                                         <img class="card-img-register" id="TAS-logo-square" src ="C:\Users\hnnhp\source\repos\MIS 321\TAS-Project\Client\dist\assets\img\Rectangular TAS Logo-light.png" alt="TAS Company Logo">
-                                        <h3 class="text-center font-weight-light my-4">Create Employee</h3>
+                                        <h3 class="text-center font-weight-light my-4">Assign Survey</h3>
                                     </div>
                                     <div class="card-body">
                                         <form>
                                             <div class="form-row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label class="small mb-1" for="inputFirstName">First Name</label>
-                                                        <input class="form-control py-4" id="inputFirstName" type="text" placeholder="Enter first name" />
+                                                        <label class="small mb-1" for="inputReviewerEmpId">Reviewer Employee Id Number</label>
+                                                        <input class="form-control py-4" id="inputReviewerEmpId" type="number" placeholder="Enter reviewer employee" />
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label class="small mb-1" for="inputLastName">Last Name</label>
-                                                        <input class="form-control py-4" id="inputLastName" type="text" placeholder="Enter last name" />
+                                                        <label class="small mb-1" for="inputSubjectEmpId">Subject Employee Id Number</label>
+                                                        <input class="form-control py-4" id="inputSubjectEmpId" type="number" placeholder="Enter subject employee" />
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="small mb-1" for="inputEmailAddress">Email</label>
-                                                <input class="form-control py-4" id="inputEmailAddress" type="email" aria-describedby="emailHelp" placeholder="Enter email address" />
                                             </div>
                                             <div class="form-row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label class="small mb-1" for="inputDepartment">Department</label>
-                                                        <input class="form-control py-4" id="inputDepartment" type="text" placeholder="Enter department" />
+                                                        <label class="small mb-1" for="inputCycle">Survey Cycle</label>
+                                                        <input class="form-control py-4" id="inputCycle" type="text" placeholder="Enter survey cycle" />
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label class="small mb-1" for="inputLevel">Level</label>
-                                                        <input class="form-control py-4" id="inputLevel" type="text" placeholder="Enter level" />
+                                                        <label class="small mb-1" for="inputDateDue">Due Date</label>
+                                                        <input class="form-control py-4" id="inputDateDue" type="date" placeholder="Enter due date" />
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label class="small mb-1" for="inputAdmin">Allow Admin Privileges? Warning: Admins can view all employee data and responses.</label>
-                                                <input class="custom-radio" type="radio" id="yesAdmin" name="gender" value="true" aria-describedby="emailHelp" />
-                                                <label  for="yesAdmin" aria-describedby="emailHelp">Yes</label>
-                                                <input class="" type="radio" id="noAdmin" name="gender" value="false" aria-describedby="emailHelp" />
-                                                <label  for="noAdmin" aria-describedby="emailHelp">No</label>
-                                            </div>
-                                            <div class="form-row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label class="small mb-1" for="inputPassword">Password</label>
-                                                        <input class="form-control py-4" id="inputPassword" type="password" placeholder="Enter password" />
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label class="small mb-1" for="inputConfirmPassword">Confirm Password</label>
-                                                        <input class="form-control py-4" id="inputConfirmPassword" type="password" placeholder="Confirm password" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group mt-4 mb-0"><a class="btn btn-primary btn-block" href="login.html">Create Employee</a></div>
+                                            <div class="form-group mt-4 mb-0"><a class="btn btn-primary btn-block" href="login.html">Assign Survey</a></div>
                                         </form>
                                     </div>
                                 </div>

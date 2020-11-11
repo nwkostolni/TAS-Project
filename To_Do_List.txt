@@ -1,0 +1,37 @@
+login.html (Login Page)
+        connect Employee.email from database to js to html
+        connect Employee.password from database to js to html
+
+dist -> index.html  (User Dashboard)
+        configure html layout
+        configure css design
+        connect all database info to js points to html
+
+task-list.html (Task List)
+        configure html layout
+        configure css design
+        connect all database info to js points to html
+
+        survey.html (Survey)
+                configure html layout
+                configure css design
+                connect all database info to js points to html
+
+admin-functions.html (Admin Functions)
+        COMPLETE
+
+        admin-employee.html (Admin Functions >> Employees)
+                add edit/delete functionality to the employee table
+                connect all database info to js points to html
+
+                register.html (Admin Functions >> Employees >> Add an Employee)
+                        connect all database info to js points to html
+
+        admin-tasks.html (Admin Functions >> Tasks)
+                connect all database info to js points to html
+
+                assign-survey.html (Admin Functions >> Tasks >> Assign Survey)
+                        connect all database info to js points to html
+
+within the left menu bar >> Manged Employees
+        figure out how to connect to other employees dashboards and task lists
