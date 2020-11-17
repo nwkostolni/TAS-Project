@@ -128,36 +128,49 @@
                                 DataTable Example
                             </div>
                             <div class="card-body">
-                                <div class="table-responsive">
+                                <div class="table-responsive" onload=getEmployees()>
+                                    <script type="text/javascript" src="C:\Users\hnnhp\source\repos\MIS 321\TAS-Project\Client\scripts\Employee.js"></script>
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                        <thead> <!--Change to a for each loop connecting to the database-->
+                                        <thead>
                                             <tr>
-                                                <th>Name</th>
-                                                <th>Position</th>
-                                                <th>Office</th>
-                                                <th>Age</th>
-                                                <th>Start date</th>
-                                                <th>Salary</th>
+                                                <th>Employee ID</th>
+                                                <th>Last Name</th>
+                                                <th>First Name</th>
+                                                <th>Email</th>
+                                                <th>Department</th>
+                                                <th>Level</th>
+                                                <!-- <th>Admin Privileges</th> -->
+                                                <!-- <th>Password</th> -->
+                                                <!-- <th>Manager ID</th>
+                                                <th>Edit & Remove</th> -->
                                             </tr>
                                         </thead>
                                         <tfoot>
                                             <tr>
-                                                <th>Name</th>
-                                                <th>Position</th>
-                                                <th>Office</th>
-                                                <th>Age</th>
-                                                <th>Start date</th>
-                                                <th>Salary</th>
+                                                <th>Employee ID</th>
+                                                <th>Last Name</th>
+                                                <th>First Name</th>
+                                                <th>Email</th>
+                                                <th>Department</th>
+                                                <th>Level</th>
+                                                <!-- <th>Admin Privileges</th> -->
+                                                <!-- <th>Password</th> -->
+                                                <!-- <th>Manager ID</th>
+                                                <th>Edit & Remove</th> -->
                                             </tr>
                                         </tfoot>
                                         <tbody>
                                             <tr>
-                                                <td>Tiger Nixon</td>
-                                                <td>System Architect</td>
-                                                <td>Edinburgh</td>
-                                                <td>61</td>
-                                                <td>2011/04/25</td>
-                                                <td>$320,800</td>
+                                                <td id="EmpId"></td>
+                                                <td id="EmpLast"></td>
+                                                <td id="EmpFirst"></td>
+                                                <td id="EmpEmail"></td>
+                                                <td id="EmpDept"></td>
+                                                <td id="EmpLevel"></td>
+                                                <!-- <td id="EmpAdmin"></td> -->
+                                                <!-- <td id="EmpPassword"></td> -->
+                                                <!-- <td id="EmpMgrId"></td> -->
+                                                <!-- <td><span class="material-icons">edit</span><text>  </text><span class="material-icons">delete</span></td> -->
                                             </tr>
                                             <tr>
                                                 <td>Garrett Winters</td>

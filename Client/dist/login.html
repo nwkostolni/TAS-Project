@@ -6,11 +6,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Page Title - SB Admin</title>
+        <title>Login</title>
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
     </head>
-    <body class="bg-primary">
+    <body class="bg-primary" >
+        <script type="text/javascript" src="js/login.js"></script>
         <div id="layoutAuthentication">
             <div id="layoutAuthentication_content">
                 <main>
@@ -18,9 +19,12 @@
                         <div class="row justify-content-center">
                             <div class="col-lg-5">
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
-                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">TAS 360 Feedback Program Login</h3></div>
+                                    <div class="card-header">
+                                        <img class="card-img-register" id="TAS-logo-square" src ="C:\Users\hnnhp\source\repos\MIS 321\TAS-Project\Client\dist\assets\img\Rectangular TAS Logo-light.png" alt="TAS Company Logo">
+                                        <h3 class="text-center font-weight-light my-4">TAS 360 Feedback Program Login</h3>
+                                    </div>
                                     <div class="card-body">
-                                        <form>
+                                        <form onsubmit="return false"; method ="get">
                                             <div class="form-group">
                                                 <label class="small mb-1" for="inputEmailAddress">Email</label>
                                                 <input class="form-control py-4" id="inputEmailAddress" type="email" placeholder="Enter email address" />
@@ -28,6 +32,9 @@
                                             <div class="form-group">
                                                 <label class="small mb-1" for="inputPassword">Password</label>
                                                 <input class="form-control py-4" id="inputPassword" type="password" placeholder="Enter password" />
+                                            </div>
+                                            <div id="errorMessage">
+
                                             </div>
                                             <div class="form-group">
                                                 <div class="custom-control custom-checkbox">
@@ -37,7 +44,9 @@
                                             </div>
                                             <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
                                                 <a class="small" href="password.html">Forgot Password?</a>
-                                                <a class="btn btn-primary" href="index.html">Login</a>
+                                                <div >
+                                                    <input  class="btn btn-primary btn-block" type="submit" value="Login" onclick="getEmployees()"/>
+                                                </div>
                                             </div>
                                         </form>
                                     </div>

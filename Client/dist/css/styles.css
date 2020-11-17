@@ -4352,6 +4352,30 @@ input[type=button].btn-block {
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
 }
+.card2 {
+  position: relative;
+  left: 11.5%;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+}
+.card3 {
+  position: relative;
+  left: 34%;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid #fff;
+  border-radius: 0.25rem;
+}
 .card > hr {
   margin-right: 0;
   margin-left: 0;
@@ -10275,4 +10299,14 @@ body {
 }
 .placeholder-text{
   color: 6c757d;
+}
+.img-icon {
+  height:150px;
+  width: auto;
+  padding-top: 10px;
+
+}
+.img-align {
+  padding-left: 25%;
+  padding-top: 25%;
 }

@@ -12,9 +12,10 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
     </head>
-    <body class="sb-nav-fixed">
+    <body class="sb-nav-fixed" onload= "getSurveys(); getUserName(); getAdmin(); getTaskList(); getManagedEmployees()">
+        <script type="text/javascript" src="js/admin-tasks.js"></script>
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-            <a class="navbar-brand" href="index.html">Start Bootstrap</a> <!--Need to make responsive to signed in user-->
+            <a class="navbar-brand" href="index.html" id="userName"></a> 
             <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
             <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
@@ -27,7 +28,9 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                        <a class="dropdown-item" href="admin-functions.html">Admin Functions</a>
+                        <div id="adminPriv">
+                            <!--Option for if Admin Functions shows. See js file for paths.-->
+                        </div>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="login.html">Logout</a>
                     </div>
@@ -40,58 +43,35 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">User</div>
-                            <a class="nav-link" href="index.html">
+                            <a class="nav-link" href="#">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 User Dashboard
                             </a>
                             <div class="sb-sidenav-menu-heading">Surveys</div>
-                            <a class="nav-link" href="task-list.html">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                Task List
-                            </a>
-                            <div class="sb-sidenav-menu-heading">Managed Employees</div>
-                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                Employee Name <!--Need to make responsive to signed in user's managed employees-->
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                    <a class="nav-link" href="#">
-                                        Dashboard
-                                    </a>
-                                    <a class="nav-link" href="#">
-                                        Tasks
-                                    </a>
-                                </nav>
+                            <div id="taskList">
+                                <!--Task List. See js file for paths.-->
                             </div>
-                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                Employee Name <!--Need to make responsive to signed in user's managed employees-->
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                    <a class="nav-link" href="#">
-                                        Dashboard
-                                    </a>
-                                    <a class="nav-link" href="#">
-                                        Tasks
-                                    </a>
-                                </nav>
+                            <div class="sb-sidenav-menu-heading">Managed Employees</div>
+                            <div id="managedEmployees">
+                                <!--Managed Employees section. See js file for paths.-->
                             </div>
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
-                        Start Bootstrap<!--Need to make responsive to signed in user-->
+                        <div id="userName2"></div>
                     </div>
                 </nav>
             </div>
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid">
-                        <h1 class="mt-4">Admin Functions - Tasks</h1>
+                        <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+                            <div>
+                                <h1 class="mt-4">Admin Functions - Tasks</h1>
+                            </div>
+                        </form> 
+                        <img class="mb-4 img-error img-icon" src="C:\Users\hnnhp\source\repos\MIS 321\TAS-Project\Client\dist\assets\img\undraw_task_31wc.svg" />
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">Assign, Edit, and Delete Suveys</li><!--Gray box for smaller text at top-->
                         </ol>
@@ -127,49 +107,8 @@
                                                 <th>Edit & Remove</th>
                                             </tr>
                                         </thead>
-                                        <tfoot>
-                                            <tr>
-                                                <th>Survey Id</th>
-                                                <th>Cycle</th>
-                                                <th>Date Due</th>
-                                                <th>Been Completed?</th>
-                                                <th>Date Completed</th>
-                                                <th>Reviewer Id</th>
-                                                <th>Subject Id</th>
-                                                <th>Edit & Remove</th>
-                                            </tr>
-                                        </tfoot>
-                                        <tbody>
-                                            <tr>
-                                                <td id="SurveyId"></td>
-                                                <td id="Cycle"></td>
-                                                <td id="DateDue"></td>
-                                                <td id="BeenCompleted"></td>
-                                                <td id="DateCompleted"></td>
-                                                <td id="ReviewerId"></td>
-                                                <td id="SubjectId"></td>
-                                                <td><span class="material-icons">edit</span><text>  </text><span class="material-icons">delete</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Garrett Winters</td>
-                                                <td>Accountant</td>
-                                                <td>Tokyo</td>
-                                                <td>63</td>
-                                                <td>2011/07/25</td>
-                                                <td>$170,750</td>
-                                                <td>$170,750</td>
-                                                <td><span class="material-icons">edit</span><text>  </text><span class="material-icons">delete</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Ashton Cox</td>
-                                                <td>Junior Technical Author</td>
-                                                <td>San Francisco</td>
-                                                <td>66</td>
-                                                <td>2009/01/12</td>
-                                                <td>$86,000</td>
-                                                <td>$170,750</td>
-                                                <td><span class="material-icons">edit</span><text>  </text><span class="material-icons">delete</span></td>
-                                            </tr>
+                                        <tbody id="surveyTable">
+                                            <!--This section targeted by js.-->
                                         </tbody>
                                     </table>
                                 </div>

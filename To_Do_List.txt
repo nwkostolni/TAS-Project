@@ -3,14 +3,11 @@ login.html (Login Page)
         connect Employee.password from database to js to html
 
 dist -> index.html  (User Dashboard)
-        configure html layout
-        configure css design
         connect all database info to js points to html
 
 task-list.html (Task List)
-        configure html layout
-        configure css design
-        connect all database info to js points to html
+        connect all database info to js points to html for table
+        connect all database info to js points to html for pie chart
 
         survey.html (Survey)
                 configure html layout
@@ -18,20 +15,23 @@ task-list.html (Task List)
                 connect all database info to js points to html
 
 admin-functions.html (Admin Functions)
-        COMPLETE
+        edit html path for both buttons
 
         admin-employee.html (Admin Functions >> Employees)
                 add edit/delete functionality to the employee table
-                connect all database info to js points to html
 
                 register.html (Admin Functions >> Employees >> Add an Employee)
                         connect all database info to js points to html
 
         admin-tasks.html (Admin Functions >> Tasks)
-                connect all database info to js points to html
+                add edit/delete functionality to the survey table
 
                 assign-survey.html (Admin Functions >> Tasks >> Assign Survey)
                         connect all database info to js points to html
 
 within the left menu bar >> Manged Employees
         figure out how to connect to other employees dashboards and task lists
+
+Extras:
+-encryption for passwords
+-pop-up 

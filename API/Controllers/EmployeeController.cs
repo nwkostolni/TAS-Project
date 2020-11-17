@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TAS_Project.Models;
 using TAS_Project.Interfaces;
+using Microsoft.AspNetCore.Cors;
 
 namespace api.Controllers
 {
@@ -14,6 +15,7 @@ namespace api.Controllers
     public class EmployeeController : ControllerBase
     {
         // GET: api/Employee
+        [EnableCors("AnotherPolicy")]
         [HttpGet]
         public List<Employee> Get()
         {
@@ -22,6 +24,7 @@ namespace api.Controllers
         }
 
         // GET: api/Employee/5
+        [EnableCors("AnotherPolicy")]
         [HttpGet("{id}", Name = "GetEmployee")]
         public string Get(int id)
         {
@@ -29,18 +32,21 @@ namespace api.Controllers
         }
 
         // POST: api/Employee
+        [EnableCors("AnotherPolicy")]
         [HttpPost]
         public void Post([FromBody] string value)
         {
         }
 
         // PUT: api/Employee/5
+        [EnableCors("AnotherPolicy")]
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
         }
 
         // DELETE: api/ApiWithActions/5
+        [EnableCors("AnotherPolicy")]
         [HttpDelete("{id}")]
         public void Delete(int id)
         {

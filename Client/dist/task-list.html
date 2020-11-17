@@ -6,14 +6,16 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Admin Functions - Employee</title> <!--This is the page title displayed on the tab-->
+        <title>My Tasks</title> <!--This is the page title displayed on the tab-->
         <link href="css/styles.css" rel="stylesheet" />
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
     </head>
-    <body class="sb-nav-fixed">
+    <body class="sb-nav-fixed" onload="getUserName(); getAdmin(); getTaskList(); getManagedEmployees()">
+        <script type="text/javascript" src="js/task-list.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-            <a class="navbar-brand" href="index.html">Start Bootstrap</a> <!--Need to make responsive to signed in user-->
+            <a class="navbar-brand" href="index.html" id="userName"></a> 
             <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
             <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
@@ -26,7 +28,9 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                        <a class="dropdown-item" href="admin-functions.html">Admin Functions</a>
+                        <div id="adminPriv">
+                            <!--Option for if Admin Functions shows. See js file for paths.-->
+                        </div>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="login.html">Logout</a>
                     </div>
@@ -39,78 +43,105 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">User</div>
-                            <a class="nav-link" href="index.html">
+                            <a class="nav-link" href="#">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 User Dashboard
                             </a>
                             <div class="sb-sidenav-menu-heading">Surveys</div>
-                            <a class="nav-link" href="task-list.html">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                Task List
-                            </a>
-                            <div class="sb-sidenav-menu-heading">Managed Employees</div>
-                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                Employee Name <!--Need to make responsive to signed in user's managed employees-->
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                    <a class="nav-link" href="#">
-                                        Dashboard
-                                    </a>
-                                    <a class="nav-link" href="#">
-                                        Tasks
-                                    </a>
-                                </nav>
+                            <div id="taskList">
+                                <!--Task List. See js file for paths.-->
                             </div>
-                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                Employee Name <!--Need to make responsive to signed in user's managed employees-->
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                    <a class="nav-link" href="#">
-                                        Dashboard
-                                    </a>
-                                    <a class="nav-link" href="#">
-                                        Tasks
-                                    </a>
-                                </nav>
+                            <div class="sb-sidenav-menu-heading">Managed Employees</div>
+                            <div id="managedEmployees">
+                                <!--Managed Employees section. See js file for paths.-->
                             </div>
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
-                        Start Bootstrap<!--Need to make responsive to signed in user-->
+                        <div id="userName2"></div>
                     </div>
                 </nav>
             </div>
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid">
-                        <h1 class="mt-4">Admin Functions</h1>
+                        <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+                            <div>
+                                <h1 class="mt-4">Assigned Tasks</h1> 
+                            </div>
+                        </form>
+                        <img class="mb-4 img-error img-icon" src="C:\Users\hnnhp\source\repos\MIS 321\TAS-Project\Client\dist\assets\img\undraw_accept_request_vdsd.svg" />
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">Employees and Assigned Tasks</li><!--Gray box for smaller text at top-->
+                            <li class="breadcrumb-item active">My Assigned Surveys</li><!--Gray box for smaller text at top-->
                         </ol>
                         <div class="row">
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card bg-success text-white mb-4">
-                                    <div class="card-body">Employees</div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="admin-employee.html"></a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i>Add, Edit, and Remove</div>
+                            <p class="card-body body">Use this page to keep track of reviews that you need to complete. The Assigned Surveys chart will help you to keep track of which surveys you have done and which surveys are remaining for each review cycle. Reviews will automatically be removed from this chart at the end of each review cycle. Click on an employee name on the table below to complete their review:</p>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <i class="fas fa-table mr-1"></i>
+                                        Assigned Surveys
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive" onload=getEmployees()>
+                                            <script type="text/javascript" src="C:\Users\hnnhp\source\repos\MIS 321\TAS-Project\Client\scripts\Employee.js"></script>
+                                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Due Date</th>
+                                                        <th>Employee to Review</th>
+                                                        <th>Completed?</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td id="DueDate"></td> <!--after due date passes, need to make surveys drop off the table, so we don't end up with years worth of surveys on this table-->
+                                                        <td id="SubjectName"></td>
+                                                        <td id="BeenCompleted"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>12/01/2020</td>
+                                                        <td id="SubjectName">Bob Smith</td>
+                                                        <td>Yes</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>12/01/2020</td>
+                                                        <td>Bob Smith</td>
+                                                        <td>Yes</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card bg-success text-white mb-4">
-                                    <div class="card-body">Tasks</div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="admin-tasks.html"></a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i>Assign, Edit, and Delete</div>
+                            <div class="col-lg-6">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <i class="fas fa-chart-pie mr-1"></i>
+                                        My Progress
                                     </div>
+                                    <div class="card-body">
+                                        <script type="canvas" src="js/Chart.js"></script>
+                                        <canvas id="myPieChartTasks" width="100%" height="50"></canvas>
+                                        <script>
+                                            var ctx = document.getElementById("myPieChartTasks");
+                                            var myPieChart = new Chart(ctx, {
+                                                type: 'pie',
+                                                data: {
+                                                    labels: ["Completed", "Incomplete"],
+                                                    datasets: [{
+                                                        data: [15, 85], //needs to be coded to database 
+                                                        backgroundColor: ['#28a745', '#6c757d'],
+                                                    }],
+                                                },
+                                            });
+                                            </script>
+                                    </div>
+                                    <div class="card-footer small text-muted">Updated just now</div>
                                 </div>
                             </div>
                         </div>
@@ -136,6 +167,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
         <script src="assets/demo/chart-area-demo.js"></script>
         <script src="assets/demo/chart-bar-demo.js"></script>
+        <script src="assets/demo/chart-pie-demo.js"></script>
         <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
         <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
         <script src="assets/demo/datatables-demo.js"></script>
