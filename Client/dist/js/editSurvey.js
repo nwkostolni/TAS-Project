@@ -89,3 +89,25 @@ function getEditSurveyButton(){
     let html = "<a class=\"btn btn-primary btn-block\" href=\"admin-tasks.html?userId="+userId+"\">Edit Survey</a>";
     document.getElementById("editSurveyButton").innerHTML=html; 
 }
+function setPlaceHolders(){
+    const allEmployeesApiUrl = "https://localhost:5001/api/Employee";
+
+    fetch(allEmployeesApiUrl).then(function(response){
+        console.log(response);
+        return response.json();
+    }).then(function(json){
+        json.forEach((Survey)=>{
+            if(Survey.SurveyId = surveyId){
+                document.getElementById("inputCycle").placeholder = Survey.Cycle;
+                document.getElementById("inputDateDue").placeholder = Survey.DateDUe;
+                document.getElementById("inputBeenCompleted").placeholder = Survey.BeenCompleted;
+                document.getElementById("inputDateCompleted").placeholder = Survey.DateCompleted;
+                document.getElementById("inputReviewer-EmpId").placeholder = Survey.ReviewerEmpId;
+                document.getElementById("inputSubjectEmpId").placeholder = Survey.SubjectEmpId;
+            }
+        })
+}).catch(function(error){
+    console.log(error);
+});
+
+}

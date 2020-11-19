@@ -63,5 +63,34 @@ namespace TAS_Project.Models
             cmd.Prepare();
             cmd.ExecuteNonQuery();
         }
+
+        public void EditEmployee(Employee Value)
+        {
+            Console.WriteLine("Inside C# Edit Employee");
+            string cs = @"URI=file:C:\Users\hnnhp\source\repos\MIS 321\TAS-Project\API\Database\TAS.db";
+                using var con = new SQLiteConnection(cs);
+                con.Open();
+                string stm = $@"DELETE FROM Employee WHERE EmployeeId = {Value.EmpId}";
+                using var cmd = new SQLiteCommand(stm, con);
+
+                cmd.Parameters.AddWithValue("@EmployeeId", Value.EmpId);
+                cmd.Prepare();
+                cmd.ExecuteNonQuery();
+                using var con2 = new SQLiteConnection(cs);
+                con2.Open();
+                using var cmd2 = new SQLiteCommand(con2);
+                cmd.CommandText = @"INSERT INTO Employee(EmployeeId, FirstName, LastName, EmployeeEmail, EmployeeDepartment, EmploymentLevel, Admin, Password, MgrId) VALUES(@EmployeeId, @FirstName, @LastName, @EmployeeEmail, @EmployeeDepartment, @EmploymentLevel, @Admin, @Password, @MgrId)";
+                cmd.Parameters.AddWithValue("@EmployeeId", Value.EmpId); 
+                cmd.Parameters.AddWithValue("@FirstName", Value.EmpFirst);
+                cmd.Parameters.AddWithValue("@LastName", Value.EmpLast); 
+                cmd.Parameters.AddWithValue("@EmployeeEmail", Value.EmpEmail); 
+                cmd.Parameters.AddWithValue("@EmployeeDepartment", Value.EmpDep); 
+                cmd.Parameters.AddWithValue("@EmploymentLevel", Value.EmpLvl); 
+                cmd.Parameters.AddWithValue("@Admin", Value.Admin); 
+                cmd.Parameters.AddWithValue("@Password", Value.Password); 
+                cmd.Parameters.AddWithValue("@MgrId", Value.MgrId);
+                cmd.Prepare();
+                cmd.ExecuteNonQuery();
+        }
     }
 }
