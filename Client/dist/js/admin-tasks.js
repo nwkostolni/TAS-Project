@@ -83,6 +83,11 @@ function getManagedEmployees(){
     });
 }
 
+function getAssignSurveyButton(){
+    let html = "<a class=\"small text-white stretched-link\" href=\"assign-survey.html?userId="+userId+"\"></a>";
+    document.getElementById("assignSurveyButton").innerHTML=html; 
+}
+
 function getSurveys(){
     const allSurveysApiUrl = "https://localhost:5001/api/Survey";
 
@@ -109,7 +114,7 @@ function getSurveys(){
             }
             html +="<td>" + Survey.reviewerEmpId + "</td>";
             html +="<td>" + Survey.subjectEmpId + "</td>";
-            html +="<td><span class=\"material-icons\">edit</span><text>  </text><span class=\"material-icons\">delete</span></td>";
+            html +="<td><span class=\"material-icons\" onclick=\"editSurvey("+Survey.surveyId+")\">edit</span><text>  </text><span class=\"material-icons\" onclick=\"deleteSurvey("+Survey.surveyId+")\">delete</span></td>";
             html += "</tr>";
             html += "<tr>";
         })
@@ -118,4 +123,38 @@ function getSurveys(){
     }).catch(function(error){
         console.log(error);
     });
+}
+
+function editSurvey(editId){
+    window.location.href = "editSurvey.html?userId=" + userId + "&editId=" +editId;
+}
+
+function deleteSurvey(editId){
+    if (confirm('Are you sure you want to delete this assignment?')) {
+        // Delete
+        deleteSurveyConfirmed(editId);
+        location.reload();
+        alert("Assignment has been deleted.");
+    } 
+    else {
+        // Cancel
+    }
+}
+
+function deleteSurveyConfirmed(editId){
+    const deleteSurveyApiUrl="https://localhost:5001/api/Survey";
+
+    fetch(deleteSurveyApiUrl, {
+        method: "DELETE",
+        headers: {
+            "Accept": 'application/json',
+            "Content-Type": 'application/json'
+        },
+        body: JSON.stringify({
+            surveyId: editId
+        })
+    })
+    .then((response)=>{
+        console.log(response);
+    })
 }

@@ -6,5 +6,6 @@ namespace TAS_Project.Interfaces
     public interface ISaveEmpData
     {
          public void UpdateEmployee(Employee value);
+         public void DeleteEmployee(Employee value);
     }
 }

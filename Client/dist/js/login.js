@@ -18,8 +18,9 @@ function getEmployees(){
 				}
 			}
 		})
-		let html="<text style=\"color:red;\">Incorrect Email or Password</text>";
-		document.getElementById("errorMessage").innerHTML=html;
+		setTimeout(() => {  
+			let html="<text style=\"color:red;\">Incorrect Email or Password</text>";
+			document.getElementById("errorMessage").innerHTML=html; }, 1000);
     }).catch(function(error){
         console.log(error);
     });

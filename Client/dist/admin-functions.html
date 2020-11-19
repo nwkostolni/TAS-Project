@@ -11,7 +11,7 @@
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
     </head>
-    <body class="sb-nav-fixed" onload="getUserName(); getAdmin(); getTaskList(); getManagedEmployees()">
+    <body class="sb-nav-fixed" onload="getUserName(); getAdmin(); getTaskList(); getManagedEmployees(); getEmployeesButton(); getTasksButton()">
         <script type="text/javascript" src="js/admin-functions.js"></script>
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <a class="navbar-brand" href="index.html" id="userName"></a> 
@@ -79,7 +79,9 @@
                                 <div class="card bg-success text-white mb-4">
                                     <div class="card-body">Employees</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="admin-employee.html"></a>
+                                        <div id="employeesButton">
+                                            <!--Employees Green Button. See js file for paths.-->
+                                        </div>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i>Add, Edit, and Remove</div>
                                     </div>
                                 </div>
@@ -88,7 +90,9 @@
                                 <div class="card bg-success text-white mb-4">
                                     <div class="card-body">Tasks</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="admin-tasks.html"></a>
+                                        <div id="tasksButton">
+                                            <!--Tasks Green Button. See js file for paths.-->
+                                        </div>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i>Assign, Edit, and Delete</div>
                                     </div>
                                 </div>

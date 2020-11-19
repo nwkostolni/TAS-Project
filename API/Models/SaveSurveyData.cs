@@ -36,5 +36,28 @@ namespace TAS_Project.Models
             cmd.Prepare();
             cmd.ExecuteNonQuery();
         }
+
+        public void DeleteSurvey(Survey value){ //Method for removing an individual survey
+            string cs;
+            try
+            {
+                cs =@"URI=file:C:\Users\hnnhp\source\repos\MIS 321\TAS-Project\API\Database\TAS.db";
+            }
+            catch (FileNotFoundException e) //Error Check
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Something went wrong.....survey was not deleted. {0}", e);
+                Console.ForegroundColor = ConsoleColor.White;
+                return;
+            }
+            using var con= new SQLiteConnection(cs);
+            con.Open(); //Open a connection to the database
+
+            using var cmd= new SQLiteCommand(con);
+
+            cmd.CommandText=$@"DELETE FROM Survey WHERE SurveyId={value.SurveyId}"; //Remove the survey that the user specified
+            cmd.Prepare();
+            cmd.ExecuteNonQuery();
+        }
     }
 }

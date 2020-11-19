@@ -15,23 +15,30 @@ task-list.html (Task List)
                 connect all database info to js points to html
 
 admin-functions.html (Admin Functions)
-        edit html path for both buttons
+        COMPLETE
 
         admin-employee.html (Admin Functions >> Employees)
-                add edit/delete functionality to the employee table
+                COMPLETE
 
                 register.html (Admin Functions >> Employees >> Add an Employee)
                         connect all database info to js points to html
+                
+                editEmployee.html (Admin Functions >> Employees >> Edit an Employee)
+                        Make default info in form = to editId information
+                        connect all database info to js points to html
 
         admin-tasks.html (Admin Functions >> Tasks)
-                add edit/delete functionality to the survey table
+                COMPLETE
 
                 assign-survey.html (Admin Functions >> Tasks >> Assign Survey)
                         connect all database info to js points to html
 
+                editSurvey.html (Admin Functions >> Employees >> Edit Survey)
+                        Make default info in form = to editId information
+                        connect all database info to js points to html
+
 within the left menu bar >> Manged Employees
-        figure out how to connect to other employees dashboards and task lists
+        update index2.html, index2.js, task-list2.html, and task-list2.js AFTER all changes have been made to originals
 
 Extras:
 -encryption for passwords
--pop-up 

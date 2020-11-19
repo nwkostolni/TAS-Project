@@ -3,6 +3,8 @@ const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 //remove user from url and put in global variable
 var userId = urlParams.get('userId');
+//remove editId from url and put in global variable
+var editId = urlParams.get('editId');
 
 
 function getUserName(){
@@ -83,7 +85,7 @@ function getManagedEmployees(){
     });
 }
 
-function getAssignSurveyButton(){
-    let html = "<a class=\"btn btn-primary btn-block\" href=\"admin-tasks.html?userId="+userId+"\">Assign Survey</a>";
-    document.getElementById("assignSurveyButton").innerHTML=html; 
+function getEditEmpButton(){
+    let html = "<a class=\"btn btn-primary btn-block\" href=\"admin-employee.html?userId="+userId+"\">Edit Employee Account</a>";
+    document.getElementById("editEmpButton").innerHTML=html; 
 }

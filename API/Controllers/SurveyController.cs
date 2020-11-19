@@ -47,9 +47,11 @@ namespace api.Controllers
 
         // DELETE: api/ApiWithActions/5
         [EnableCors("AnotherPolicy")]
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete]
+        public void Delete([FromBody] Survey value)
         {
+            ISaveSurveyData deleteObject = new SaveSurveyData();
+            deleteObject.DeleteSurvey(value);
         }
     }
 }

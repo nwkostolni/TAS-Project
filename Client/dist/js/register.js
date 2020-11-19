@@ -82,3 +82,8 @@ function getManagedEmployees(){
         console.log(error);
     });
 }
+
+function getCreateEmpButton(){
+    let html = "<a class=\"btn btn-primary btn-block\" href=\"admin-employee.html?userId="+userId+"\">Create Employee Account</a>";
+    document.getElementById("createEmpButton").innerHTML=html; 
+}

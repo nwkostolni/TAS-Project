@@ -40,5 +40,28 @@ namespace TAS_Project.Models
             cmd.Prepare();
             cmd.ExecuteNonQuery();
         }
+
+        public void DeleteEmployee(Employee value){ //Method for removing an individual employee
+            string cs;
+            try
+            {
+                cs =@"URI=file:C:\Users\hnnhp\source\repos\MIS 321\TAS-Project\API\Database\TAS.db";
+            }
+            catch (FileNotFoundException e) //Error Check
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Something went wrong.....employee was not deleted. {0}", e);
+                Console.ForegroundColor = ConsoleColor.White;
+                return;
+            }
+            using var con= new SQLiteConnection(cs);
+            con.Open(); //Open a connection to the database
+
+            using var cmd= new SQLiteCommand(con);
+
+            cmd.CommandText=$@"DELETE FROM Employee WHERE EmployeeId={value.EmpId}"; //Remove the employee that the user specified
+            cmd.Prepare();
+            cmd.ExecuteNonQuery();
+        }
     }
 }

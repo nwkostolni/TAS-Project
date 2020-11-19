@@ -12,7 +12,7 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
     </head>
-    <body class="sb-nav-fixed"  onload= "getUserName(); getAdmin(); getTaskList(); getManagedEmployees(); getEmployees()">
+    <body class="sb-nav-fixed"  onload= "getUserName(); getAdmin(); getTaskList(); getManagedEmployees(); getEmployees(); getAddEmployeeButton()">
         <script type="text/javascript" src="js/admin-employee.js"></script>
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <a class="navbar-brand" href="index.html" id="userName"></a> 
@@ -80,7 +80,9 @@
                                 <div class="card bg-success text-white mb-4">
                                     <div class="card-body">Add an Employee</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="register.html"></a>
+                                        <div id="addEmployeeButton">
+                                            <!--Add an Employee Green Button. See js file for paths.-->
+                                        </div>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                     </div>
                                 </div>

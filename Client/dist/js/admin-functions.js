@@ -82,3 +82,13 @@ function getManagedEmployees(){
         console.log(error);
     });
 }
+
+function getEmployeesButton(){
+    let html = "<a class=\"small text-white stretched-link\" href=\"admin-employee.html?userId="+userId+"\"></a>";
+    document.getElementById("employeesButton").innerHTML=html; 
+}
+
+function getTasksButton(){
+    let html = "<a class=\"small text-white stretched-link\" href=\"admin-tasks.html?userId="+userId+"\"></a>";
+    document.getElementById("tasksButton").innerHTML=html; 
+}

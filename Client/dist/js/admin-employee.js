@@ -83,6 +83,11 @@ function getManagedEmployees(){
     });
 }
 
+function getAddEmployeeButton(){
+    let html = "<a class=\"small text-white stretched-link\" href=\"register.html?userId="+userId+"\"></a>";
+    document.getElementById("addEmployeeButton").innerHTML=html; 
+}
+
 function getEmployees(){
     const allEmployeesApiUrl = "https://localhost:5001/api/Employee";
 
@@ -105,7 +110,7 @@ function getEmployees(){
             }
             html +="<td>" + Employee.password + "</td>";
             html +="<td>" + Employee.mgrId + "</td>";
-            html +="<td><span class=\"material-icons\">edit</span><text>  </text><span class=\"material-icons\">delete</span></td>";
+            html +="<td><span class=\"material-icons\" onclick=\"editEmployee("+Employee.empId+")\">edit</span><text>  </text><span class=\"material-icons\" onclick=\"deleteEmployee("+Employee.empId+")\">delete</span></td>";
             html += "</tr>";
             html += "<tr>";
         })
@@ -114,4 +119,38 @@ function getEmployees(){
     }).catch(function(error){
         console.log(error);
     });
+}
+
+function editEmployee(editId){
+    window.location.href = "editEmployee.html?userId=" + userId + "&editId=" +editId;
+}
+
+function deleteEmployee(editId){
+    if (confirm('Are you sure you want to remove this employee?')) {
+        // Remove
+        deleteEmployeeConfirmed(editId);
+        location.reload();
+        alert("Employee has been removed.");
+    } 
+    else {
+        // Cancel
+    }
+}
+
+function deleteEmployeeConfirmed(editId){
+    const deleteEmployeeApiUrl="https://localhost:5001/api/Employee";
+
+    fetch(deleteEmployeeApiUrl, {
+        method: "DELETE",
+        headers: {
+            "Accept": 'application/json',
+            "Content-Type": 'application/json'
+        },
+        body: JSON.stringify({
+            empId: editId
+        })
+    })
+    .then((response)=>{
+        console.log(response);
+    })
 }
