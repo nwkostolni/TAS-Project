@@ -66,7 +66,6 @@ namespace TAS_Project.Models
 
         public void EditEmployee(Employee Value)
         {
-            Console.WriteLine("Inside C# Edit Employee");
             string cs = @"URI=file:C:\Users\hnnhp\source\repos\MIS 321\TAS-Project\API\Database\TAS.db";
                 using var con = new SQLiteConnection(cs);
                 con.Open();

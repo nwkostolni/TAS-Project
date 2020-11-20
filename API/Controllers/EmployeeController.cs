@@ -40,7 +40,7 @@ namespace api.Controllers
 
         // PUT: api/Employee/5
         [EnableCors("AnotherPolicy")]
-        [HttpPut("{id}", Name = "Put")]
+        [HttpPut]
         public void Put([FromBody] Employee value)
         {
             ISaveEmpData editObject = new SaveEmpData();

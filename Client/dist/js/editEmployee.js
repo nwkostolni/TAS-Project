@@ -86,7 +86,7 @@ function getManagedEmployees(){
 }
 
 function getEditEmpButton(){
-    let html = "<a class=\"btn btn-primary btn-block\" type=\"submit\" onclick=\"editEmployee()\" href=\"admin-employee.html?userId="+userId+"\">Edit Employee Account</a>";
+    let html = "<a class=\"btn btn-primary btn-block\" type=\"submit\"  onclick=\"editEmployee1()\" >Edit Employee Account</a>"; //href=\"admin-employee.html?userId="+userId+"\"
     document.getElementById("editEmpButton").innerHTML=html; 
 }
 
@@ -106,6 +106,12 @@ function setPlaceholders(){
                     document.getElementById("inputDepartment").placeholder = Employee.empDep;
                     document.getElementById("inputLevel").placeholder = Employee.empLvl;
                     document.getElementById("inputMgrId").placeholder = Employee.mgrId;
+                    if(Employee.admin==1){
+                        document.getElementById("inputAdmin").checked = true;
+                    }
+                    else{
+                        document.getElementById("inputAdmin").checked = false;
+                    }
                     document.getElementById("inputPassword").placeholder = Employee.password;
                     document.getElementById("inputConfirmPassword").placeholder = Employee.password;
                 }
@@ -115,98 +121,71 @@ function setPlaceholders(){
     });
 }
 
-function editEmployee(){
+function editEmployee1(){
     const editEmployeeApiUrl="https://localhost:5001/api/Employee";
-    alert("INSIDE editEmployee");
-    const employeeFirst ="";
-    if(document.getElementById("inputFirstName").value == null){
-        employeeFirst=editId.empFirst;
-    }
-    else{
-        employeeFirst=document.getElementById("inputFirstName").value;
-    }
 
-    const employeeLast="";
-    if(document.getElementById("inputLastName").value == null){
-        employeeLast=editId.empLast;
-    }
-    else{
-        employeeLast=document.getElementById("inputLastName").value;
-    }
-    
-    const employeeEmail="";
-    if(document.getElementById("inputEmailAddress").value == null){
-        employeeEmail=editId.empEmail;
-    }
-    else{
-        employeeEmail=document.getElementById("inputEmailAddress").value;
-    }
+    fetch(editEmployeeApiUrl).then(function(response){
+        console.log(response);
+        return response.json();
+    }).then(function(json){
+            json.forEach((Employee)=>{
+                if(Employee.empId==editId){
+                    const employeeId = Employee.empId;
+                    const employeeFirst = document.getElementById("inputFirstName").value ?
+                    document.getElementById("inputFirstName").value : Employee.empFirst
+                
+                    const employeeLast=document.getElementById("inputLastName").value ?
+                    document.getElementById("inputLastName").value : Employee.empLast
+                    
+                    const employeeEmail=document.getElementById("inputEmailAddress").value ?
+                    document.getElementById("inputEmailAddress").value : Employee.empEmail
+                
+                    const employeeDep=document.getElementById("inputDepartment").value ?
+                    document.getElementById("inputDepartment").value : Employee.empDep
+                
+                    const employeeLvl=document.getElementById("inputLevel").value ?
+                    document.getElementById("inputLevel").value : Employee.empLvl
+                
+                    const employeeAdmin= document.getElementById("inputAdmin").value ?
+                    false : true 
+                
+                    const employeeMgrId=document.getElementById("inputMgrId").value ?
+                    document.getElementById("inputMgrId").value : Employee.mgrId
+                
+                    const employeePassword=document.getElementById("inputPassword").value ?
+                    document.getElementById("inputPassword").value : Employee.password
 
-    const employeeDep="";
-    if(document.getElementById("inputDepartment").value == null){
-        employeeDep=editId.empDep;
-    }
-    else{
-        employeeDep=document.getElementById("inputDepartment").value;
-    }
+                    editEmployee2(employeeId, employeeFirst, employeeLast, employeeEmail, employeeDep, employeeLvl, employeeAdmin, employeeMgrId, employeePassword);
+                }
+            })
+    }).catch(function(error){
+        console.log(error);
+    });
+}
 
-    const employeeLvl="";
-    if(document.getElementById("inputLevel").value == null){
-        employeeLvl=editId.empLvl;
-    }
-    else{
-        employeeLvl=document.getElementById("inputLevel").value;
-    }
+function editEmployee2(employeeId, employeeFirst, employeeLast, employeeEmail, employeeDep, employeeLvl, employeeAdmin, employeeMgrId, employeePassword){
+    const editEmployee2ApiUrl="https://localhost:5001/api/Employee";
 
-    const employeeAdmin="";
-    if((document.getElementById("yesAdmin").value == null)&&(document.getElementById("noAdmin").value == null)){
-        employeeAdmin=editId.admin;
-    }
-    else if ((document.getElementById("yesAdmin").value != null)&&(document.getElementById("noAdmin").value == null)){
-        employeeAdmin=1;
-    }
-    else{
-        employeeAdmin=0;
-    }
-
-    const employeeMgrId="";
-    if(document.getElementById("inputMgrId").value == null){
-        employeeMgrId=editId.mgrId;
-    }
-    else{
-        employeeMgrId=document.getElementById("inputMgrId").value;
-    }
-
-    const employeePassword="";
-    if(document.getElementById("inputPassword").value == null){
-        employeePassword=editId.Password;
-    }
-    else{
-        employeePassword=document.getElementById("inputPassword").value;
-    }
-
-    fetch(editEmployeeApiUrl, {
-        method: "Put", 
+    fetch(editEmployee2ApiUrl, {
+        method: "PUT", 
         headers: {
             "Accept": 'application/json',
             "Content-Type": 'application/json'
         },
         body: JSON.stringify({
-            empId: editId,
+            empId: employeeId,
             empFirst: employeeFirst,
             empLast: employeeLast,
             empEmail: employeeEmail,
             empDep: employeeDep,
             empLvl: employeeLvl,
-            admin: employeeAdmin ,
+            admin: employeeAdmin,
             mgrId: employeeMgrId,
             password: employeePassword
         })
-
     })
     .then((response)=>{
         console.log(response);
+        window.location.href = "admin-employee.html?userId="+userId;
     })
 }
-
-
