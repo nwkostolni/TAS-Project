@@ -12,7 +12,7 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
     </head>
-    <body class="sb-nav-fixed" onload="getUserName(); getAdmin(); getTaskList(); getManagedEmployees(); getCreateEmpButton()">
+    <body class="sb-nav-fixed" onload="getUserName(); getAdmin(); getDashboard(); getTaskList(); getManagedEmployees(); getCreateEmpButton()">
         <script type="text/javascript" src="js/register.js"></script>
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <a class="navbar-brand" href="index.html" id="userName"></a> 
@@ -43,10 +43,9 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">User</div>
-                            <a class="nav-link" href="#">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                User Dashboard
-                            </a>
+                            <div id="dashboard">
+                                <!--User Dashboard. See js file for paths.-->
+                            </div>
                             <div class="sb-sidenav-menu-heading">Surveys</div>
                             <div id="taskList">
                                 <!--Task List. See js file for paths.-->
@@ -82,7 +81,7 @@
                                         <h3 class="text-center font-weight-light my-4">Add an Employee</h3>
                                     </div>
                                     <div class="card-body">
-                                        <form>
+                                        <form onsubmit="return false"; method ="post">
                                             <div class="form-row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
@@ -117,7 +116,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label class="small mb-1" for="inputMgrId">Manager Id</label>
-                                                <input class="form-control py-4" id="inputMgrId" type="text" aria-describedby="emailHelp" placeholder="Enter manager's Id number" />
+                                                <input class="form-control py-4" id="inputMgrId" type="number" aria-describedby="emailHelp" placeholder="Enter manager's Id number" />
                                             </div>
                                             <div class="form-group">
                                                 <label class="small mb-1" for="inputAdmin">Allow Admin Privileges? Warning: Admins can view all employee data and responses.</label>

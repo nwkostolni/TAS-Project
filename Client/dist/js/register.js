@@ -49,6 +49,11 @@ function getAdmin(){
     });
 }
 
+function getDashboard(){
+    let html = "<a class=\"nav-link\" href=\"index.html?userId="+userId+"\"><div class=\"sb-nav-link-icon\"><i class=\"fas fa-tachometer-alt\"></i></div>User Dashboard</a>";
+    document.getElementById("dashboard").innerHTML=html; 
+}
+
 function getTaskList(){
     let html = "<a class=\"nav-link\" href=\"task-list.html?userId="+userId+"\"><div class=\"sb-nav-link-icon\"><i class=\"fas fa-columns\"></i></div>Task List</a>";
     document.getElementById("taskList").innerHTML=html; 
@@ -84,6 +89,79 @@ function getManagedEmployees(){
 }
 
 function getCreateEmpButton(){
-    let html = "<a class=\"btn btn-primary btn-block\" href=\"admin-employee.html?userId="+userId+"\">Create Employee Account</a>";
+    let html = "<a class=\"btn btn-primary btn-block\" type=\"submit\" onclick=\"AddEmployee()\" >Create Employee Account</a>"; //href=\"admin-employee.html?userId="+userId+"\"
     document.getElementById("createEmpButton").innerHTML=html; 
+}
+
+/* function preAddEmployee(){
+    const allEmployeesApiUrl = "https://localhost:5001/api/Employee";
+
+    fetch(allEmployeesApiUrl).then(function(response){
+        console.log(response);
+        return response.json();
+    }).then(function(json){
+        let id=0;
+        json.forEach((Employee)=>{
+            id++;
+        })
+        id++;
+        alert("in preadd, id is "+id);
+        AddEmployee(id);
+    }).catch(function(error){
+        console.log(error);
+    });
+} */
+function preAddEmployee(){
+    const formId= 21;
+    const formFirstName= document.getElementById("inputFirstName").value;
+    const formLastName= document.getElementById("inputLastName").value;
+    const formEmail= document.getElementById("inputEmailAddress").value;
+    const formDepartment= document.getElementById("inputDepartment").value;
+    const formLevel= document.getElementById("inputLevel").value;
+    const formMgrId= document.getElementById("inputMgrId").value;
+    const formAdmin= document.getElementById("inputAdmin").value ? true : false 
+    const formPassword=document.getElementById("inputPassword").value;
+    AddEmployee(formId, formFirstName, formLastName, formEmail, formDepartment, formLevel, formMgrId, formAdmin, formPassword);
+}
+
+function AddEmployee(){
+    const formId= 21;
+    const formFirstName= document.getElementById("inputFirstName").value;
+    const formLastName= document.getElementById("inputLastName").value;
+    const formEmail= document.getElementById("inputEmailAddress").value;
+    const formDepartment= document.getElementById("inputDepartment").value;
+    const formLevel= document.getElementById("inputLevel").value;
+    const formMgrId= document.getElementById("inputMgrId").value;
+    const formAdmin= document.getElementById("inputAdmin").value ? true : false 
+    const formPassword=document.getElementById("inputPassword").value;
+    /* if(document.getElementById("inputPassword").value == document.getElementById("inputConfirmPassword").value){
+        formPassword= document.getElementById("inputPassword").value;
+    }
+    else{
+        alert("Passwords do not match. Make sure the passwords match, then click create again.");
+    } */
+    const addEmployeeApiUrl = "https://localhost:5001/api/Employee";
+
+    fetch(addEmployeeApiUrl, {
+        method: "POST",
+        headers: {
+            "Accept": 'application/json',
+            "Content-Type": 'application/json'
+        },
+        body: JSON.stringify({
+            empId: formId,
+            empFirst: formFirstName,
+            empLast: formLastName,
+            empEmail: formEmail,
+            empDep: formDepartment,
+            empLvl: formLevel,
+            admin: formAdmin,
+            mgrId: formMgrId,
+            password: formPassword
+        })
+    })
+    .then((response)=>{
+        console.log(response);
+        //window.location.href = "admin-employee.html?userId="+userId;
+    })
 }

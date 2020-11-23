@@ -49,6 +49,11 @@ function getAdmin(){
     });
 }
 
+function getDashboard(){
+    let html = "<a class=\"nav-link\" href=\"index.html?userId="+userId+"\"><div class=\"sb-nav-link-icon\"><i class=\"fas fa-tachometer-alt\"></i></div>User Dashboard</a>";
+    document.getElementById("dashboard").innerHTML=html; 
+}
+
 function getTaskList(){
     let html = "<a class=\"nav-link\" href=\"task-list.html?userId="+userId+"\"><div class=\"sb-nav-link-icon\"><i class=\"fas fa-columns\"></i></div>Task List</a>";
     document.getElementById("taskList").innerHTML=html; 
@@ -81,4 +86,57 @@ function getManagedEmployees(){
     }).catch(function(error){
         console.log(error);
     });
+}
+
+function getSurveys(){
+    const allSurveysApiUrl = "https://localhost:5001/api/Survey";
+
+    fetch(allSurveysApiUrl).then(function(response){
+        console.log(response);
+        return response.json();
+    }).then(function(json){
+        let html = "<tr>";
+        json.forEach((Survey)=>{
+            if(Survey.reviewerEmpId==userId){
+                html +="<td>" + Survey.dateDue + "</td>";
+                //var subjectName= getSubjectName(Survey.subjectEmpId);//This Function
+                //alert(subjectName);
+                html +="<td id=\""+Survey.subjectEmpId+"\"></td>";
+                if(Survey.beenCompleted==1){
+                    html +="<td><span class=\"material-icons\">check_box</span></td>";
+                }
+                else{
+                    html +="<td><span class=\"material-icons cursor\" onclick=\"goToSurvey("+Survey.subjectEmpId+")\">forward</span></td>";
+                }
+                html += "</tr>";
+                html += "<tr>";
+            }
+        })
+        html += "</tr>";
+        document.getElementById("surveyTable").innerHTML=html; 
+    }).catch(function(error){
+        console.log(error);
+    });
+}
+
+function getSubjectName(){
+    const allEmployeesApiUrl = "https://localhost:5001/api/Employee";
+
+    fetch(allEmployeesApiUrl).then(function(response){
+        console.log(response);
+        return response.json();
+    }).then(function(json){
+        json.forEach((Employee)=>{
+            if(document.getElementById(Employee.empId) !== null){
+                var subjectName=(Employee.empFirst + " " + Employee.empLast);
+                document.getElementById(Employee.empId).innerHTML=subjectName;
+            }
+        })
+    }).catch(function(error){
+        console.log(error);
+    });
+}
+
+function goToSurvey(subjectEmpId){
+    window.location.href = "survey.html?userId=" + userId + "&subjectId=" +subjectEmpId;
 }

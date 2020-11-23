@@ -1,3 +1,6 @@
+using System.Threading;
+using System.Security.AccessControl;
+using System.Diagnostics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,9 +36,11 @@ namespace api.Controllers
 
         // POST: api/Employee
         [EnableCors("AnotherPolicy")]
-        [HttpPost]
-        public void Post([FromBody] string value)
+        [HttpPost] 
+        public void Post([FromBody] Employee value)
         {
+            ISaveEmpData insertObject = new SaveEmpData();
+            insertObject.UpdateEmployee(value);
         }
 
         // PUT: api/Employee/5

@@ -51,6 +51,11 @@ function getAdmin(){
     });
 }
 
+function getDashboard(){
+    let html = "<a class=\"nav-link\" href=\"index.html?userId="+userId+"\"><div class=\"sb-nav-link-icon\"><i class=\"fas fa-tachometer-alt\"></i></div>User Dashboard</a>";
+    document.getElementById("dashboard").innerHTML=html; 
+}
+
 function getTaskList(){
     let html = "<a class=\"nav-link\" href=\"task-list.html?userId="+userId+"\"><div class=\"sb-nav-link-icon\"><i class=\"fas fa-columns\"></i></div>Task List</a>";
     document.getElementById("taskList").innerHTML=html; 
@@ -86,7 +91,7 @@ function getManagedEmployees(){
 }
 
 function getEditEmpButton(){
-    let html = "<a class=\"btn btn-primary btn-block\" type=\"submit\"  onclick=\"editEmployee1()\" >Edit Employee Account</a>"; //href=\"admin-employee.html?userId="+userId+"\"
+    let html = "<a class=\"btn btn-primary btn-block\" type=\"submit\"  onclick=\"editEmployee1()\" >Edit Employee Account</a>"; 
     document.getElementById("editEmpButton").innerHTML=html; 
 }
 

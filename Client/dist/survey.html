@@ -11,7 +11,7 @@
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
     </head>
-    <body class="sb-nav-fixed" onload="getUserName(); getAdmin(); getTaskList(); getManagedEmployees()">
+    <body class="sb-nav-fixed" onload="getUserName(); getAdmin(); getDashboard(); getTaskList(); getManagedEmployees()">
         <script type="text/javascript" src="js/survey.js"></script>
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <a class="navbar-brand" href="index.html" id="userName"></a> 
@@ -42,10 +42,9 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">User</div>
-                            <a class="nav-link" href="#">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                User Dashboard
-                            </a>
+                            <div id="dashboard">
+                                <!--User Dashboard. See js file for paths.-->
+                            </div>
                             <div class="sb-sidenav-menu-heading">Surveys</div>
                             <div id="taskList">
                                 <!--Task List. See js file for paths.-->

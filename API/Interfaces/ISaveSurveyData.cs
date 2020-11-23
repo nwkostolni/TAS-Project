@@ -7,5 +7,6 @@ namespace TAS_Project.Interfaces
     {
         public void UpdateSurveys(Survey value);
         public void DeleteSurvey(Survey value);
+        public void EditSurvey(Survey value);
     }
 }

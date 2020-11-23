@@ -9,9 +9,10 @@
         <title>My Tasks</title> <!--This is the page title displayed on the tab-->
         <link href="css/styles.css" rel="stylesheet" />
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
     </head>
-    <body class="sb-nav-fixed" onload="getUserName(); getAdmin(); getTaskList(); getManagedEmployees()">
+    <body class="sb-nav-fixed" onload="getUserName(); getAdmin(); getDashboard(); getTaskList(); getManagedEmployees(); getSurveys(); getSubjectName()">
         <script type="text/javascript" src="js/task-list.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -43,10 +44,9 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">User</div>
-                            <a class="nav-link" href="#">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                User Dashboard
-                            </a>
+                            <div id="dashboard">
+                                <!--User Dashboard. See js file for paths.-->
+                            </div>
                             <div class="sb-sidenav-menu-heading">Surveys</div>
                             <div id="taskList">
                                 <!--Task List. See js file for paths.-->
@@ -93,25 +93,11 @@
                                                     <tr>
                                                         <th>Due Date</th>
                                                         <th>Employee to Review</th>
-                                                        <th>Completed?</th>
+                                                        <th>Go To Survey</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td id="DueDate"></td> <!--after due date passes, need to make surveys drop off the table, so we don't end up with years worth of surveys on this table-->
-                                                        <td id="SubjectName"></td>
-                                                        <td id="BeenCompleted"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>12/01/2020</td>
-                                                        <td id="SubjectName">Bob Smith</td>
-                                                        <td>Yes</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>12/01/2020</td>
-                                                        <td>Bob Smith</td>
-                                                        <td>Yes</td>
-                                                    </tr>
+                                                <tbody id="surveyTable">
+                                                    <!--This section targeted by js.-->
                                                 </tbody>
                                             </table>
                                         </div>

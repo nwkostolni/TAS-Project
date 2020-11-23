@@ -10,6 +10,7 @@ namespace TAS_Project.Models
     {   
 
         public void UpdateEmployee(Employee employee){ //Method for saving an emplyoyee
+            Console.WriteLine("begin updateemployee");
             string cs;
             try
             {
@@ -28,7 +29,7 @@ namespace TAS_Project.Models
             using var cmd= new SQLiteCommand(con);
             
             cmd.CommandText=@"INSERT INTO Employee(EmployeeId, FirstName, LastName, EmployeeEmail, EmployeeDepartment, EmploymentLevel, Admin, Password, MgrId) VALUES(@EmployeeId, @FirstName, @LastName, @EmployeeEmail, @EmployeeDepartment, @EmploymentLevel, @Admin, @Password, @MgrId)"; //Adds new employee into the database
-            cmd.Parameters.AddWithValue("@EmployeeId", employee.EmpId); 
+            cmd.Parameters.AddWithValue("@EmployeeId", employee.EmpId);
             cmd.Parameters.AddWithValue("@FirstName", employee.EmpFirst);
             cmd.Parameters.AddWithValue("@LastName", employee.EmpLast); 
             cmd.Parameters.AddWithValue("@EmployeeEmail", employee.EmpEmail); 
@@ -39,6 +40,7 @@ namespace TAS_Project.Models
             cmd.Parameters.AddWithValue("@MgrId", employee.MgrId); 
             cmd.Prepare();
             cmd.ExecuteNonQuery();
+            Console.WriteLine("end updateemployee");
         }
 
         public void DeleteEmployee(Employee value){ //Method for removing an individual employee

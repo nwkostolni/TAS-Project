@@ -12,7 +12,7 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
     </head>
-    <body class="sb-nav-fixed" onload="getUserName(); getAdmin(); getTaskList(); getManagedEmployees(); getEditSurveyButton()">
+    <body class="sb-nav-fixed" onload="getUserName(); getAdmin(); getDashboard(); getTaskList(); getManagedEmployees(); getEditSurveyButton(); setPlaceHolders()">
         <script type="text/javascript" src="js/editSurvey.js"></script>
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <a class="navbar-brand" href="index.html" id="userName"></a> 
@@ -43,10 +43,9 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">User</div>
-                            <a class="nav-link" href="#">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                User Dashboard
-                            </a>
+                            <div id="dashboard">
+                                <!--User Dashboard. See js file for paths.-->
+                            </div>
                             <div class="sb-sidenav-menu-heading">Surveys</div>
                             <div id="taskList">
                                 <!--Task List. See js file for paths.-->
@@ -86,14 +85,14 @@
                                             <div class="form-row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label class="small mb-1" for="inputReviewerEmpId">Reviewer Employee Id Number</label>
-                                                        <input class="form-control py-4" id="inputReviewerEmpId" type="number" placeholder="Enter reviewer employee" />
+                                                        <label class="small mb-1" for="inputReviewerId">Reviewer Employee Id Number</label>
+                                                        <input class="form-control py-4" id="inputReviewerId" type="number" placeholder="Enter reviewer employee" />
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label class="small mb-1" for="inputSubjectEmpId">Subject Employee Id Number</label>
-                                                        <input class="form-control py-4" id="inputSubjectEmpId" type="number" placeholder="Enter subject employee" />
+                                                        <label class="small mb-1" for="inputSubjectId">Subject Employee Id Number</label>
+                                                        <input class="form-control py-4" id="inputSubjectId" type="number" placeholder="Enter subject employee" />
                                                     </div>
                                                 </div>
                                             </div>

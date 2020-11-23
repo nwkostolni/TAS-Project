@@ -51,6 +51,11 @@ function getAdmin(){
     });
 }
 
+function getDashboard(){
+    let html = "<a class=\"nav-link\" href=\"index.html?userId="+userId+"\"><div class=\"sb-nav-link-icon\"><i class=\"fas fa-tachometer-alt\"></i></div>User Dashboard</a>";
+    document.getElementById("dashboard").innerHTML=html; 
+}
+
 function getTaskList(){
     let html = "<a class=\"nav-link\" href=\"task-list.html?userId="+userId+"\"><div class=\"sb-nav-link-icon\"><i class=\"fas fa-columns\"></i></div>Task List</a>";
     document.getElementById("taskList").innerHTML=html; 
@@ -86,28 +91,93 @@ function getManagedEmployees(){
 }
 
 function getEditSurveyButton(){
-    let html = "<a class=\"btn btn-primary btn-block\" href=\"admin-tasks.html?userId="+userId+"\">Edit Survey</a>";
+    let html = "<a class=\"btn btn-primary btn-block\" type=\"submit\"  onclick=\"editSurvey1()\" >Edit Survey</a>";
     document.getElementById("editSurveyButton").innerHTML=html; 
 }
 function setPlaceHolders(){
-    const allEmployeesApiUrl = "https://localhost:5001/api/Employee";
+    const allSurveysApiUrl = "https://localhost:5001/api/Survey";
 
-    fetch(allEmployeesApiUrl).then(function(response){
+    fetch(allSurveysApiUrl).then(function(response){
         console.log(response);
         return response.json();
     }).then(function(json){
         json.forEach((Survey)=>{
-            if(Survey.SurveyId = surveyId){
-                document.getElementById("inputCycle").placeholder = Survey.Cycle;
-                document.getElementById("inputDateDue").placeholder = Survey.DateDUe;
-                document.getElementById("inputBeenCompleted").placeholder = Survey.BeenCompleted;
-                document.getElementById("inputDateCompleted").placeholder = Survey.DateCompleted;
-                document.getElementById("inputReviewer-EmpId").placeholder = Survey.ReviewerEmpId;
-                document.getElementById("inputSubjectEmpId").placeholder = Survey.SubjectEmpId;
+            if(Survey.surveyId==editId){
+                document.getElementById("inputReviewerId").placeholder = Survey.reviewerEmpId;
+                document.getElementById("inputSubjectId").placeholder = Survey.subjectEmpId;
+                document.getElementById("inputCycle").placeholder = Survey.cycle;
+                document.getElementById("inputDateDue").placeholder = Survey.dateDue;
             }
         })
-}).catch(function(error){
-    console.log(error);
-});
+    }).catch(function(error){
+        console.log(error);
+    });
+}
 
+function editSurvey1(){
+    const editSurveyApiUrl="https://localhost:5001/api/Survey";
+    fetch(editSurveyApiUrl).then(function(response){
+        console.log(response);
+        return response.json();
+    }).then(function(json){
+            json.forEach((Survey)=>{
+                if(Survey.surveyId==editId){
+                    const SurveyId = Survey.surveyId;
+
+                    const SurveyCycle = document.getElementById("inputCycle").value ?
+                    document.getElementById("inputCycle").value : Survey.cycle
+                
+                    const SurveyReviewerId=document.getElementById("inputReviewerId").value ?
+                    document.getElementById("inputReviewerId").value : Survey.reviewerEmpId
+                    
+                    const SurveySubjectId=document.getElementById("inputSubjectId").value ?
+                    document.getElementById("inputSubjectId").value : Survey.subjectEmpId
+                
+                    const SurveyDateDue=document.getElementById("inputDateDue").value ?
+                    document.getElementById("inputDateDue").value : Survey.dateDue
+                
+                    const SurveyBeenCompleted = Survey.beenCompleted;
+
+                    const SurveyDateCompleted = Survey.dateCompleted;
+                    /* var SurveyDateCompleted;
+                    var date = Date.parse(Survey.dateCompleted) || 0;
+                    if(date==0){
+                        SurveyDateCompleted= null;
+                    }
+                    else{
+                        SurveyDateCompleted=date;
+                    }
+                    alert("date is "+date+"and SurveyDateCompleted is "+SurveyDateCompleted); */
+                    editSurvey2(SurveyId, SurveyCycle, SurveyReviewerId, SurveySubjectId, SurveyDateDue, SurveyBeenCompleted, SurveyDateCompleted);
+                }
+            })
+    }).catch(function(error){
+        console.log(error);
+    });
+}
+
+function editSurvey2(SurveyId, SurveyCycle, SurveyReviewerId, SurveySubjectId, SurveyDateDue, SurveyBeenCompleted, SurveyDateCompleted){
+    const editSurveyApiUrl="https://localhost:5000/api/Survey";
+
+    fetch(editSurveyApiUrl, {
+        method: "PUT", 
+        headers: {
+            "Accept": 'application/json',
+            "Content-Type": 'application/json'
+        },
+        body: JSON.stringify({
+            surveyId: SurveyId,
+            cycle: SurveyCycle,
+            reviewerEmpId: SurveyReviewerId,
+            subjectEmpId: SurveySubjectId,
+            dateDue: SurveyDateDue,
+            beenCompleted: SurveyBeenCompleted,
+            dateCompleted: SurveyDateCompleted
+        })
+    })
+    .then((response)=>{
+        console.log(response);
+        alert("editSurvey2 end");
+        window.location.href = "admin-tasks.html?userId="+userId;
+    })
 }

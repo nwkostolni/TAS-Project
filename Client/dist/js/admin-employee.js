@@ -49,6 +49,11 @@ function getAdmin(){
     });
 }
 
+function getDashboard(){
+    let html = "<a class=\"nav-link\" href=\"index.html?userId="+userId+"\"><div class=\"sb-nav-link-icon\"><i class=\"fas fa-tachometer-alt\"></i></div>User Dashboard</a>";
+    document.getElementById("dashboard").innerHTML=html; 
+}
+
 function getTaskList(){
     let html = "<a class=\"nav-link\" href=\"task-list.html?userId="+userId+"\"><div class=\"sb-nav-link-icon\"><i class=\"fas fa-columns\"></i></div>Task List</a>";
     document.getElementById("taskList").innerHTML=html; 
@@ -110,7 +115,7 @@ function getEmployees(){
             }
             html +="<td>" + Employee.password + "</td>";
             html +="<td>" + Employee.mgrId + "</td>";
-            html +="<td><span class=\"material-icons\" onclick=\"editEmployee("+Employee.empId+")\">edit</span><text>  </text><span class=\"material-icons\" onclick=\"deleteEmployee("+Employee.empId+")\">delete</span></td>";
+            html +="<td><span class=\"material-icons cursor\" onclick=\"editEmployee("+Employee.empId+")\">edit</span><text>  </text><span class=\"material-icons cursor\" onclick=\"deleteEmployee("+Employee.empId+")\">delete</span></td>";
             html += "</tr>";
             html += "<tr>";
         })

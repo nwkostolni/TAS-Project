@@ -40,9 +40,11 @@ namespace api.Controllers
 
         // PUT: api/Survey/5
         [EnableCors("AnotherPolicy")]
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut]
+        public void Put([FromBody] Survey value)
         {
+            ISaveSurveyData editObject = new SaveSurveyData();
+            editObject.EditSurvey(value);
         }
 
         // DELETE: api/ApiWithActions/5

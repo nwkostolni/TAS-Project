@@ -59,5 +59,30 @@ namespace TAS_Project.Models
             cmd.Prepare();
             cmd.ExecuteNonQuery();
         }
+
+        public void EditSurvey(Survey Value){
+            string cs = @"URI=file:C:\Users\hnnhp\source\repos\MIS 321\TAS-Project\API\Database\TAS.db";
+                using var con = new SQLiteConnection(cs);
+                con.Open();
+                string stm = $@"DELETE FROM Survey WHERE SurveyId = {Value.SurveyId}";
+                using var cmd = new SQLiteCommand(stm, con);
+
+                cmd.Parameters.AddWithValue("@SurveyId", Value.SurveyId);
+                cmd.Prepare();
+                cmd.ExecuteNonQuery();
+                using var con2 = new SQLiteConnection(cs);
+                con2.Open();
+                using var cmd2 = new SQLiteCommand(con2);
+                cmd.CommandText=@"INSERT INTO Survey(SurveyId, Cycle, DateDue, BeenCompleted, DateCompleted, ReviewerEmpId, SubjectEmpId) VALUES(@SurveyId, @Cycle, @DateDue, @BeenCompleted, @DateCompleted, @ReviewerEmpId, @SubjectEmpId)";
+                cmd.Parameters.AddWithValue("@SurveyId", Value.SurveyId); 
+                cmd.Parameters.AddWithValue("@Cycle", Value.Cycle);
+                cmd.Parameters.AddWithValue("@DateDue", Value.DateDue); 
+                cmd.Parameters.AddWithValue("@BeenCompleted", Value.BeenCompleted); 
+                cmd.Parameters.AddWithValue("@DateCompleted", Value.DateCompleted); 
+                cmd.Parameters.AddWithValue("@ReviewerEmpId", Value.ReviewerEmpId); 
+                cmd.Parameters.AddWithValue("@SubjectEmpId", Value.SubjectEmpId); 
+                cmd.Prepare();
+                cmd.ExecuteNonQuery();
+        }
     }
 }
