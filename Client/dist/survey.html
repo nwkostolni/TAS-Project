@@ -11,7 +11,7 @@
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
     </head>
-    <body class="sb-nav-fixed" onload="getUserName(); getAdmin(); getDashboard(); getTaskList(); getManagedEmployees()">
+    <body class="sb-nav-fixed" onload="getUserName(); getAdmin(); getDashboard(); getTaskList(); getManagedEmployees(); getQuestions(); getSubjectName(); getCloseButton()">
         <script type="text/javascript" src="js/survey.js"></script>
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <a class="navbar-brand" href="index.html" id="userName"></a> 
@@ -65,8 +65,8 @@
                 <main>
                     <div class="container-fluid">
                         <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-                            <div>
-                                <h1 class="mt-4">Survey for [Employee Name]</h1> <!--Need to make responsive to assigned employee-->
+                            <div id="surveyFor">
+                                <!--Page Header reading "Survey for ...". See js file for paths.-->
                             </div>
                         </form>
                         <img class="mb-4 img-error img-icon" src="C:\Users\hnnhp\source\repos\MIS 321\TAS-Project\Client\dist\assets\img\undraw_voting_nvu7.svg" />
@@ -79,62 +79,24 @@
                                     <thead>
                                         <tr>
                                             <th>Question</th>
-                                            <th>Never</th>
-                                            <th>Rarely</th>
-                                            <th>Sometimes</th>
-                                            <th>Often</th>
-                                            <th>Always</th>
+                                            <th>Your Response</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td id="Question">Sample question text would go here?</td>
-                                            <td><input class="custom-radio" type="radio" id="yesAdmin" name="gender" value="true" /></td>
-                                            <td><input class="custom-radio" type="radio" id="yesAdmin" name="gender" value="true" /></td>
-                                            <td><input class="custom-radio" type="radio" id="yesAdmin" name="gender" value="true" /></td>
-                                            <td><input class="custom-radio" type="radio" id="yesAdmin" name="gender" value="true" /></td>
-                                            <td><input class="custom-radio" type="radio" id="yesAdmin" name="gender" value="true" /></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Sample question text would go here?</td>
-                                            <td><input class="custom-radio" type="radio" id="yesAdmin" name="gender" value="true" /></td>
-                                            <td><input class="custom-radio" type="radio" id="yesAdmin" name="gender" value="true" /></td>
-                                            <td><input class="custom-radio" type="radio" id="yesAdmin" name="gender" value="true" /></td>
-                                            <td><input class="custom-radio" type="radio" id="yesAdmin" name="gender" value="true" /></td>
-                                            <td><input class="custom-radio" type="radio" id="yesAdmin" name="gender" value="true" /></td>
-                                        </tr>
+                                    <tbody id="questionTable">
+                                        <!-- See js for table info. -->
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-xl-3 col-md-6">
-                                <button type="button">Close without Saving</button>
-                            </div>
-                            <div class="col-xl-3 col-md-6">
-                                <button type="button">Previous</button>
-                            </div>
-                            <div class="col-xl-3 col-md-6">
-                                <button type="button">Next</button>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card bg-success text-white mb-4">
-                                    <div class="card-body">Employees</div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="admin-employee.html"></a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i>Add, Edit, and Remove</div>
-                                    </div>
+                            <div class="col-xl-auto">
+                                <div class="card bg-success text-white mb-4" id="closeWithoutSaving">
+                                    <!--Close Button. See js file for paths.-->
                                 </div>
                             </div>
-                            <div class="col-xl-3 col-md-6">
+                            <div class="col-xl-auto">
                                 <div class="card bg-success text-white mb-4">
-                                    <div class="card-body">Tasks</div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="admin-tasks.html"></a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i>Assign, Edit, and Delete</div>
-                                    </div>
+                                    <a class="btn btn-primary btn-block" type="submit"  onclick="saveResponses()">Submit</a>
                                 </div>
                             </div>
                         </div>

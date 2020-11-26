@@ -99,14 +99,12 @@ function getSurveys(){
         json.forEach((Survey)=>{
             if(Survey.reviewerEmpId==userId){
                 html +="<td>" + Survey.dateDue + "</td>";
-                //var subjectName= getSubjectName(Survey.subjectEmpId);//This Function
-                //alert(subjectName);
                 html +="<td id=\""+Survey.subjectEmpId+"\"></td>";
                 if(Survey.beenCompleted==1){
                     html +="<td><span class=\"material-icons\">check_box</span></td>";
                 }
                 else{
-                    html +="<td><span class=\"material-icons cursor\" onclick=\"goToSurvey("+Survey.subjectEmpId+")\">forward</span></td>";
+                    html +="<td><span class=\"material-icons cursor\" onclick=\"goToSurvey("+Survey.subjectEmpId+", "+Survey.surveyId+")\">forward</span></td>";
                 }
                 html += "</tr>";
                 html += "<tr>";
@@ -137,6 +135,6 @@ function getSubjectName(){
     });
 }
 
-function goToSurvey(subjectEmpId){
-    window.location.href = "survey.html?userId=" + userId + "&subjectId=" +subjectEmpId;
+function goToSurvey(subjectEmpId, surveyId){
+    window.location.href = "survey.html?userId=" + userId + "&subjectId=" +subjectEmpId + "&surveyId=" +surveyId;
 }

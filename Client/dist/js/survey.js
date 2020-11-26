@@ -3,6 +3,10 @@ const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 //remove user from url and put in global variable
 var userId = urlParams.get('userId');
+//remove subject from url and put in global variable
+var subjectId = urlParams.get('subjectId');
+//remove survey id from url and put in global variable
+var surveyId = urlParams.get('surveyId');
 
 
 function getUserName(){
@@ -86,4 +90,99 @@ function getManagedEmployees(){
     }).catch(function(error){
         console.log(error);
     });
+}
+
+function getCloseButton(){
+    let html = "<a class=\"btn btn-primary btn-block\" href=\"task-list.html?userId="+userId+"\">Close without Saving</a>"; 
+    document.getElementById("closeWithoutSaving").innerHTML=html; 
+}
+
+function getSubjectName(){
+    const allEmployeesApiUrl = "https://localhost:5001/api/Employee";
+
+    fetch(allEmployeesApiUrl).then(function(response){
+        console.log(response);
+        return response.json();
+    }).then(function(json){
+        let html="";
+        json.forEach((Employee)=>{
+            if(Employee.empId==subjectId){
+                html += "<h1 class=\"mt-4\">Survey for "+Employee.empFirst+" "+Employee.empLast+"</h1> ";
+            }
+        })
+        document.getElementById("surveyFor").innerHTML=html; 
+    }).catch(function(error){
+        console.log(error);
+    });
+}
+
+function getQuestions(){
+    const allQuestionsApiUrl = "https://localhost:5001/api/Question";
+
+    fetch(allQuestionsApiUrl).then(function(response){
+        console.log(response);
+        return response.json();
+    }).then(function(json){
+        let html = "<tr>";
+        let i = 0;
+        json.forEach((Question)=>{
+            if(Question.allowMultipleAnswers==true){
+                html +="<td>" + Question.qstText + "</td>";
+                html +="<td><label class=\"tab\">Never</label><input class=\"custom-radio\" name=\"a"+i+"\" type=\"radio\" id=\"never\" value=\"1\" /><label class=\"tab\">Rarely</label><input class=\"custom-radio\" name=\"a"+i+"\" type=\"radio\" id=\"rarely\" value=\"2\" /><label class=\"tab\">Sometimes</label><input class=\"custom-radio\" name=\"a"+i+"\" type=\"radio\" id=\"sometimes\" value=\"3\" /><label class=\"tab\">Often</label><input class=\"custom-radio\" name=\"a"+i+"\" type=\"radio\" id=\"often\" value=\"4\" /><label class=\"tab\">Always</label><input class=\"custom-radio\" name=\"a"+i+"\" type=\"radio\" id=\"always\" value=\"5\" /></td>";
+                html += "</tr>";
+                html += "<tr>";
+                i++;
+            }
+            else{
+                html +="<td>" + Question.qstText + "</td>";
+                html +="<td><input class=\"form-control py-4\" id=\"a"+i+"\" name=\"openEnded\" type=\"text\" placeholder=\"Share your thoughts...\" /></td>";
+                html += "</tr>";
+                html += "<tr>";
+                i++;
+            }
+        })
+        html += "</tr>";
+        document.getElementById("questionTable").innerHTML=html; 
+    }).catch(function(error){
+        console.log(error);
+    });
+}
+
+function saveResponses(){
+    var answerResponses = [];
+    var i=0;
+    var x =document.getElementsByName("openEnded");
+    var flip = false;
+    while(i<58){
+        for (j = 0; j < x.length; j++) {
+            if (x[j].id == ("a"+i)) {
+              flip = true;
+            }
+        }
+        if(flip){
+            answerResponses[i] = {
+                ansNumeric: null,
+                ansText: document.getElementById("a"+i).value,
+                surveyId: surveyId,
+                inputChoiceId: 6,
+                qstId: (i+1)
+            };
+            i++;
+            flip=false;
+        }
+        else{
+            if(document.querySelector('input[name=a'+i+']:checked') ==null){
+                alert("Please answer all questions before submitting.");
+                break;
+            }
+            answerResponses[i] = {
+            ansNumeric: document.querySelector('input[name=a'+i+']:checked').value,
+            ansText: null,
+            surveyId: surveyId,
+            inputChoiceId: document.querySelector('input[name=a'+i+']:checked').value,
+            qstId: (i+1)
+            };
+            i++;
+        }
+    }
 }
