@@ -104,7 +104,16 @@ function getSurveys(){
         json.forEach((Survey)=>{
             html +="<td>" + Survey.surveyId + "</td>";
             html +="<td>" + Survey.cycle + "</td>";
-            html +="<td>" + Survey.dateDue + "</td>";
+            var newDate= new Date(Survey.dateDue);
+            Date.prototype.addHours = function(h) {
+                this.setTime(this.getTime() + (h*60*60*1000));
+                return this;
+            }
+            var newDate = newDate.addHours(6);
+            var day =newDate.getDate();
+            var month = newDate.getMonth()+1;
+            var year =newDate.getFullYear();
+            html +="<td>" + month+"/"+day+"/"+year + "</td>";
             if(Survey.beenCompleted==1){
                 html +="<td><span class=\"material-icons\">check_box</span></td>";
             }
@@ -115,7 +124,16 @@ function getSurveys(){
                 html +="<td></td>";
             }
             else{
-                html +="<td>" + Survey.dateCompleted + "</td>";
+                var newDate2= new Date(Survey.dateCompleted);
+                Date.prototype.addHours = function(h) {
+                    this.setTime(this.getTime() + (h*60*60*1000));
+                    return this;
+                }
+                var newDate2 = newDate2.addHours(6);
+                var day =newDate2.getDate();
+                var month = newDate2.getMonth()+1;
+                var year =newDate2.getFullYear();
+                html +="<td>" + month+"/"+day+"/"+year + "</td>";
             }
             html +="<td>" + Survey.reviewerEmpId + "</td>";
             html +="<td>" + Survey.subjectEmpId + "</td>";

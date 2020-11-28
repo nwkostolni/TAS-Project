@@ -128,26 +128,23 @@ function editSurvey1(){
                     document.getElementById("inputCycle").value : Survey.cycle
                 
                     const SurveyReviewerId=document.getElementById("inputReviewerId").value ?
-                    document.getElementById("inputReviewerId").value : Survey.reviewerEmpId
+                    +document.getElementById("inputReviewerId").value : Survey.reviewerEmpId
                     
                     const SurveySubjectId=document.getElementById("inputSubjectId").value ?
-                    document.getElementById("inputSubjectId").value : Survey.subjectEmpId
+                    +document.getElementById("inputSubjectId").value : Survey.subjectEmpId
                 
-                    const SurveyDateDue=document.getElementById("inputDateDue").value ?
-                    document.getElementById("inputDateDue").value : Survey.dateDue
-                
+                    if(document.getElementById("inputDateDue").value == ""){
+                        alert("A Due Date must be entered.");
+                        return;
+                    }
+
+                    var SurveyDateDue= new Date(document.getElementById("inputDateDue").value).toJSON();
+
+
                     const SurveyBeenCompleted = Survey.beenCompleted;
 
-                    const SurveyDateCompleted = Survey.dateCompleted;
-                    /* var SurveyDateCompleted;
-                    var date = Date.parse(Survey.dateCompleted) || 0;
-                    if(date==0){
-                        SurveyDateCompleted= null;
-                    }
-                    else{
-                        SurveyDateCompleted=date;
-                    }
-                    alert("date is "+date+"and SurveyDateCompleted is "+SurveyDateCompleted); */
+                    var SurveyDateCompleted = new Date(Survey.dateCompleted).toJSON();
+
                     editSurvey2(SurveyId, SurveyCycle, SurveyReviewerId, SurveySubjectId, SurveyDateDue, SurveyBeenCompleted, SurveyDateCompleted);
                 }
             })
@@ -157,7 +154,7 @@ function editSurvey1(){
 }
 
 function editSurvey2(SurveyId, SurveyCycle, SurveyReviewerId, SurveySubjectId, SurveyDateDue, SurveyBeenCompleted, SurveyDateCompleted){
-    const editSurveyApiUrl="https://localhost:5000/api/Survey";
+    const editSurveyApiUrl="https://localhost:5001/api/Survey";
 
     fetch(editSurveyApiUrl, {
         method: "PUT", 
@@ -177,7 +174,6 @@ function editSurvey2(SurveyId, SurveyCycle, SurveyReviewerId, SurveySubjectId, S
     })
     .then((response)=>{
         console.log(response);
-        alert("editSurvey2 end");
         window.location.href = "admin-tasks.html?userId="+userId;
     })
 }

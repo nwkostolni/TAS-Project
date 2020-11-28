@@ -34,13 +34,13 @@ namespace api.Controllers
         // POST: api/Answer
         [EnableCors("AnotherPolicy")]
         [HttpPost]
-        public void Post([FromBody] Answer[] arrayOfAnswers)
+        public void Post([FromBody] Answer value)
         {
             Console.WriteLine("top of POST");
-            foreach(Answer a in arrayOfAnswers){
+  
                 ISaveAnswerData insertObject = new SaveAnswerData();
-                insertObject.UpdateAnswer(a);
-            }
+                insertObject.UpdateAnswer(value);
+
         }
 
         // PUT: api/Answer/5

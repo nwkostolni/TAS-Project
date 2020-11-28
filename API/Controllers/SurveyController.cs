@@ -1,3 +1,4 @@
+using System.Collections.ObjectModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,7 +45,7 @@ namespace api.Controllers
         public void Put([FromBody] Survey value)
         {
             ISaveSurveyData editObject = new SaveSurveyData();
-            editObject.EditSurvey(value);
+            editObject.EditSurvey(value); 
         }
 
         // DELETE: api/ApiWithActions/5

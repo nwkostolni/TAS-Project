@@ -31,8 +31,7 @@ admin-functions.html (Admin Functions)
                         connect all database info to js points to html
 
                 editSurvey.html (Admin Functions >> Employees >> Edit Survey)
-                        Make default info in form = to editId information
-                        connect all database info to js points to html
+                        COMPLETE
 
 within the left menu bar >> Manged Employees
         update index2.html, index2.js, task-list2.html, and task-list2.js AFTER all changes have been made to originals
