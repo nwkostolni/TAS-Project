@@ -166,6 +166,7 @@ function getGlobalAnsId(){
 }
 
 function saveResponses(){
+    //THIS SECTION COMMENTED OUT UNTIL POST METHOD IS WORKING
     /* var answerResponses = [];
     var i=0;
     var x =document.getElementsByName("openEnded");
@@ -211,7 +212,10 @@ function saveResponses(){
         }
     } */
 
-    var answerResponses = [];
+
+
+    //Temporary array code to reduce errors until the post method is running.
+    var answerResponses = []; 
     answerResponses[0] = {
         AnsId: globalAnsId,
         AnsNumeric: 7,
@@ -229,7 +233,6 @@ function saveResponses(){
             QstId: 1
         };
 
-    //dataToPost = JSON.stringify({ methodParam: answerResponses });
 
     const allAnswersApiUrl = "https://localhost:5001/api/Answer";
 
