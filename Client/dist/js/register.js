@@ -89,11 +89,11 @@ function getManagedEmployees(){
 }
 
 function getCreateEmpButton(){
-    let html = "<input class=\"btn btn-primary btn-block\" type=\"submit\" value=\"Create Employee Account\"onclick=\"AddEmployee()\" />"; //href=\"admin-employee.html?userId="+userId+"\"
+    let html = "<input class=\"btn btn-primary btn-block\" type=\"submit\" value=\"Create Employee Account\"onclick=\"preAddEmployee()\" />"; //href=\"admin-employee.html?userId="+userId+"\"
     document.getElementById("createEmpButton").innerHTML=html; 
 }
 
-/* function preAddEmployee(){
+ function preAddEmployee(){
     const allEmployeesApiUrl = "https://localhost:5001/api/Employee";
 
     fetch(allEmployeesApiUrl).then(function(response){
@@ -105,41 +105,27 @@ function getCreateEmpButton(){
             id++;
         })
         id++;
-        alert("in preadd, id is "+id);
         AddEmployee(id);
     }).catch(function(error){
         console.log(error);
     });
-} */
-function preAddEmployee(){
-    const formId= 21;
-    const formFirstName= document.getElementById("inputFirstName").value;
-    const formLastName= document.getElementById("inputLastName").value;
-    const formEmail= document.getElementById("inputEmailAddress").value;
-    const formDepartment= document.getElementById("inputDepartment").value;
-    const formLevel= document.getElementById("inputLevel").value;
-    const formMgrId= document.getElementById("inputMgrId").value;
-    const formAdmin= document.getElementById("inputAdmin").value ? true : false 
-    const formPassword=document.getElementById("inputPassword").value;
-    AddEmployee(formId, formFirstName, formLastName, formEmail, formDepartment, formLevel, formMgrId, formAdmin, formPassword);
-}
+} 
 
-function AddEmployee(){
-    const formId= 21;
+function AddEmployee(id){
+    const formId= id;
     const formFirstName= document.getElementById("inputFirstName").value;
     const formLastName= document.getElementById("inputLastName").value;
     const formEmail= document.getElementById("inputEmailAddress").value;
     const formDepartment= document.getElementById("inputDepartment").value;
     const formLevel= document.getElementById("inputLevel").value;
-    const formMgrId= document.getElementById("inputMgrId").value;
-    const formAdmin= document.getElementById("inputAdmin").value ? true : false 
+    const formMgrId= +document.getElementById("inputMgrId").value;
+    const preFormAdmin= document.querySelector('input[id=\'inputAdmin\']:checked') ? 1 : 0
+    const formAdmin = new Boolean(preFormAdmin);
     const formPassword=document.getElementById("inputPassword").value;
-    /* if(document.getElementById("inputPassword").value == document.getElementById("inputConfirmPassword").value){
-        formPassword= document.getElementById("inputPassword").value;
-    }
-    else{
+    if(document.getElementById("inputPassword").value != document.getElementById("inputConfirmPassword").value){
         alert("Passwords do not match. Make sure the passwords match, then click create again.");
-    } */
+        return;
+    }
     const addEmployeeApiUrl = "https://localhost:5001/api/Employee";
 
     fetch(addEmployeeApiUrl, {
@@ -162,6 +148,6 @@ function AddEmployee(){
     })
     .then((response)=>{
         console.log(response);
-        //window.location.href = "admin-employee.html?userId="+userId;
+        window.location.href = "admin-employee.html?userId="+userId;
     })
 }

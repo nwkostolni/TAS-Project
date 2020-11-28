@@ -150,12 +150,13 @@ function editEmployee1(){
                 
                     const employeeLvl=document.getElementById("inputLevel").value ?
                     document.getElementById("inputLevel").value : Employee.empLvl
-                
-                    const employeeAdmin= document.getElementById("inputAdmin").value ?
-                    false : true 
+                    
+                    const preEmployeeAdmin= document.querySelector('input[id=\'inputAdmin\']:checked') ?
+                    1 : 0
+                    var employeeAdmin = new Boolean(preEmployeeAdmin);
                 
                     const employeeMgrId=document.getElementById("inputMgrId").value ?
-                    document.getElementById("inputMgrId").value : Employee.mgrId
+                    +document.getElementById("inputMgrId").value : Employee.mgrId
                 
                     const employeePassword=document.getElementById("inputPassword").value ?
                     document.getElementById("inputPassword").value : Employee.password

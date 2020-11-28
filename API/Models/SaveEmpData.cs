@@ -9,8 +9,7 @@ namespace TAS_Project.Models
     public class SaveEmpData : ISaveEmpData
     {   
 
-        public void UpdateEmployee(Employee employee){ //Method for saving an emplyoyee
-            Console.WriteLine("begin updateemployee");
+        public void UpdateEmployee(Employee employee){ //Method for adding an emplyoyee
             string cs;
             try
             {
@@ -40,7 +39,6 @@ namespace TAS_Project.Models
             cmd.Parameters.AddWithValue("@MgrId", employee.MgrId); 
             cmd.Prepare();
             cmd.ExecuteNonQuery();
-            Console.WriteLine("end updateemployee");
         }
 
         public void DeleteEmployee(Employee value){ //Method for removing an individual employee
