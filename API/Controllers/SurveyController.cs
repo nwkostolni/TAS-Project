@@ -35,8 +35,10 @@ namespace api.Controllers
         // POST: api/Survey
         [EnableCors("AnotherPolicy")]
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] Survey value)
         {
+            ISaveSurveyData insertObject = new SaveSurveyData();
+            insertObject.UpdateSurvey(value);
         }
 
         // PUT: api/Survey/5

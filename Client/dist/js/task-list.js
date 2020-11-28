@@ -98,7 +98,16 @@ function getSurveys(){
         let html = "<tr>";
         json.forEach((Survey)=>{
             if(Survey.reviewerEmpId==userId){
-                html +="<td>" + Survey.dateDue + "</td>";
+                var newDate= new Date(Survey.dateDue);
+                Date.prototype.addHours = function(h) {
+                    this.setTime(this.getTime() + (h*60*60*1000));
+                    return this;
+                }
+                var newDate = newDate.addHours(6);
+                var day =newDate.getDate();
+                var month = newDate.getMonth()+1;
+                var year =newDate.getFullYear();
+                html +="<td>" + month+"/"+day+"/"+year + "</td>";
                 html +="<td id=\""+Survey.subjectEmpId+"\"></td>";
                 if(Survey.beenCompleted==1){
                     html +="<td><span class=\"material-icons\">check_box</span></td>";

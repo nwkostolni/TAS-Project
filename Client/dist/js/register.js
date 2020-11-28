@@ -89,11 +89,11 @@ function getManagedEmployees(){
 }
 
 function getCreateEmpButton(){
-    let html = "<input class=\"btn btn-primary btn-block\" type=\"submit\" value=\"Create Employee Account\"onclick=\"preAddEmployee()\" />"; //href=\"admin-employee.html?userId="+userId+"\"
+    let html = "<input class=\"btn btn-primary btn-block\" type=\"submit\" value=\"Create Employee Account\"onclick=\"preAddEmployee()\" />"; 
     document.getElementById("createEmpButton").innerHTML=html; 
 }
 
- function preAddEmployee(){
+function preAddEmployee(){
     const allEmployeesApiUrl = "https://localhost:5001/api/Employee";
 
     fetch(allEmployeesApiUrl).then(function(response){

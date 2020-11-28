@@ -9,7 +9,7 @@ namespace TAS_Project.Models
 {
     public class SaveSurveyData : ISaveSurveyData
     {
-        public void UpdateSurveys(Survey survey){ //Method for saving survey data
+        public void UpdateSurvey(Survey survey){ //Method for saving survey data
             string cs;
             try
             {

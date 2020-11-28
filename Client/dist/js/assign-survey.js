@@ -89,6 +89,57 @@ function getManagedEmployees(){
 }
 
 function getAssignSurveyButton(){
-    let html = "<a class=\"btn btn-primary btn-block\" href=\"admin-tasks.html?userId="+userId+"\">Assign Survey</a>";
+    let html = "<input class=\"btn btn-primary btn-block\" type=\"submit\" value=\"Assign Survey\" onclick=\"preAddSurvey()\"/>";
     document.getElementById("assignSurveyButton").innerHTML=html; 
+}
+
+function preAddSurvey(){
+    const allSurveysApiUrl = "https://localhost:5001/api/Survey";
+
+    fetch(allSurveysApiUrl).then(function(response){
+        console.log(response);
+        return response.json();
+    }).then(function(json){
+        let id=0;
+        json.forEach((Survey)=>{
+            id++;
+        })
+        id++;
+        AddSurvey(id);
+    }).catch(function(error){
+        console.log(error);
+    });
+} 
+
+function AddSurvey(id){
+    const formId= id;
+    const formCycle= document.getElementById("inputCycle").value;
+    const formReviewerEmpId= +document.getElementById("inputReviewerEmpId").value;
+    const formSubjectEmpId= +document.getElementById("inputSubjectEmpId").value;
+    var formDateDue= new Date(document.getElementById("inputDateDue").value).toJSON();
+    const formBeenCompleted= new Boolean(false);
+    const formDateCompleted= null;
+
+    const addSurveyApiUrl = "https://localhost:5001/api/Survey";
+
+    fetch(addSurveyApiUrl, {
+        method: "POST",
+        headers: {
+            "Accept": 'application/json',
+            "Content-Type": 'application/json'
+        },
+        body: JSON.stringify({
+            surveyId: formId,
+            cycle: formCycle,
+            reviewerEmpId: formReviewerEmpId,
+            subjectEmpId: formSubjectEmpId,
+            dateDue: formDateDue,
+            beenCompleted: formBeenCompleted,
+            dateCompleted: formDateCompleted
+        })
+    })
+    .then((response)=>{
+        console.log(response);
+        window.location.href = "admin-tasks.html?userId="+userId;
+    })
 }

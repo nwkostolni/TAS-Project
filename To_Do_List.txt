@@ -19,7 +19,7 @@ admin-functions.html (Admin Functions)
                 COMPLETE
 
                 register.html (Admin Functions >> Employees >> Add an Employee)
-                        connect all database info to js points to html
+                        COMPLETE
                 
                 editEmployee.html (Admin Functions >> Employees >> Edit an Employee)
                         COMPLETE
@@ -28,7 +28,7 @@ admin-functions.html (Admin Functions)
                 COMPLETE
 
                 assign-survey.html (Admin Functions >> Tasks >> Assign Survey)
-                        connect all database info to js points to html
+                        COMPLETE
 
                 editSurvey.html (Admin Functions >> Employees >> Edit Survey)
                         COMPLETE
