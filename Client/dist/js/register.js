@@ -89,7 +89,7 @@ function getManagedEmployees(){
 }
 
 function getCreateEmpButton(){
-    let html = "<a class=\"btn btn-primary btn-block\" type=\"submit\" onclick=\"AddEmployee()\" >Create Employee Account</a>"; //href=\"admin-employee.html?userId="+userId+"\"
+    let html = "<input class=\"btn btn-primary btn-block\" type=\"submit\" value=\"Create Employee Account\"onclick=\"AddEmployee()\" />"; //href=\"admin-employee.html?userId="+userId+"\"
     document.getElementById("createEmpButton").innerHTML=html; 
 }
 
@@ -149,15 +149,15 @@ function AddEmployee(){
             "Content-Type": 'application/json'
         },
         body: JSON.stringify({
-            empId: formId,
-            empFirst: formFirstName,
-            empLast: formLastName,
-            empEmail: formEmail,
-            empDep: formDepartment,
-            empLvl: formLevel,
-            admin: formAdmin,
-            mgrId: formMgrId,
-            password: formPassword
+            EmpId: formId,
+            EmpFirst: formFirstName,
+            EmpLast: formLastName,
+            EmpEmail: formEmail,
+            EmpDep: formDepartment,
+            EmpLvl: formLevel,
+            Admin: formAdmin,
+            MgrId: formMgrId,
+            Password: formPassword
         })
     })
     .then((response)=>{

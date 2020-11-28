@@ -11,7 +11,7 @@
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
     </head>
-    <body class="sb-nav-fixed" onload="getUserName(); getAdmin(); getDashboard(); getTaskList(); getManagedEmployees(); getQuestions(); getSubjectName(); getCloseButton()">
+    <body class="sb-nav-fixed" onload="getUserName(); getAdmin(); getDashboard(); getTaskList(); getManagedEmployees(); getQuestions(); getSubjectName(); getCloseButton(); getGlobalAnsId()">
         <script type="text/javascript" src="js/survey.js"></script>
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <a class="navbar-brand" href="index.html" id="userName"></a> 
@@ -73,33 +73,36 @@
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active"></li><!--Gray box for smaller text at top-->
                         </ol>
-                        <div class="card-body">
-                            <div class="table-responsive" onload=getEmployees()>
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>Question</th>
-                                            <th>Your Response</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="questionTable">
-                                        <!-- See js for table info. -->
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xl-auto">
-                                <div class="card bg-success text-white mb-4" id="closeWithoutSaving">
-                                    <!--Close Button. See js file for paths.-->
+                        <form method ="post">
+                            <div class="card-body">
+                                <div class="table-responsive" onload=getEmployees()>
+                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                            <thead>
+                                                <tr>
+                                                    <th>Question</th>
+                                                    <th>Your Response</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="questionTable">
+                                                <!-- See js for table info. -->
+                                            </tbody>
+                                        </table>
+
                                 </div>
                             </div>
-                            <div class="col-xl-auto">
-                                <div class="card bg-success text-white mb-4">
-                                    <a class="btn btn-primary btn-block" type="submit"  onclick="saveResponses()">Submit</a>
+                            <div class="row">
+                                <div class="col-xl-auto">
+                                    <div class="card bg-success text-white mb-4" id="closeWithoutSaving">
+                                        <!--Close Button. See js file for paths.-->
+                                    </div>
+                                </div>
+                                <div class="col-xl-auto">
+                                    <div class="card bg-success text-white mb-4">
+                                        <input class="btn btn-primary btn-block" type="submit"  value="Submit" onclick="saveResponses()"/>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </main>
                 <footer class="py-4 bg-light mt-auto">

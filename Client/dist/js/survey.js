@@ -148,8 +148,25 @@ function getQuestions(){
     });
 }
 
+var globalAnsId="";
+function getGlobalAnsId(){
+    const allAnswersApiUrl = "https://localhost:5001/api/Answer";
+
+    fetch(allAnswersApiUrl).then(function(response){
+        console.log(response);
+        return response.json();
+    }).then(function(json){
+        json.forEach((Answer)=>{
+            globalAnsId=Answer.ansId;
+        })
+        globalAnsId+=1;
+    }).catch(function(error){
+        console.log(error);
+    });
+}
+
 function saveResponses(){
-    var answerResponses = [];
+    /* var answerResponses = [];
     var i=0;
     var x =document.getElementsByName("openEnded");
     var flip = false;
@@ -160,7 +177,12 @@ function saveResponses(){
             }
         }
         if(flip){
+            if(document.getElementById("a"+i).value ==null){
+                alert("Please answer all questions before submitting.");
+                break;
+            }
             answerResponses[i] = {
+                ansId: globalAnsId,
                 ansNumeric: null,
                 ansText: document.getElementById("a"+i).value,
                 surveyId: surveyId,
@@ -169,6 +191,7 @@ function saveResponses(){
             };
             i++;
             flip=false;
+            globalAnsId+=1;
         }
         else{
             if(document.querySelector('input[name=a'+i+']:checked') ==null){
@@ -176,6 +199,7 @@ function saveResponses(){
                 break;
             }
             answerResponses[i] = {
+            ansId: globalAnsId,
             ansNumeric: document.querySelector('input[name=a'+i+']:checked').value,
             ansText: null,
             surveyId: surveyId,
@@ -183,6 +207,44 @@ function saveResponses(){
             qstId: (i+1)
             };
             i++;
+            globalAnsId+=1;
         }
-    }
+    } */
+
+    var answerResponses = [];
+    answerResponses[0] = {
+        AnsId: globalAnsId,
+        AnsNumeric: 7,
+        AnsText: "hello",
+        SurveyId: surveyId,
+        InputChoiceId: 7,
+        QstId: 1
+        };
+        answerResponses[1] = {
+            AnsId: globalAnsId,
+            AnsNumeric: 8,
+            AnsText: "hola",
+            SurveyId: surveyId,
+            InputChoiceId: 7,
+            QstId: 1
+        };
+
+    //dataToPost = JSON.stringify({ methodParam: answerResponses });
+
+    const allAnswersApiUrl = "https://localhost:5001/api/Answer";
+
+    fetch(allAnswersApiUrl, {
+        method: "POST",
+        headers: {
+            "Accept": 'application/json',
+            "Content-Type": 'application/json'
+        },
+        body: JSON.stringify({
+            methodParam: answerResponses
+        })
+    })
+    .then((response)=>{
+        console.log(response);
+        alert("made it to then in .js");
+    })
 }

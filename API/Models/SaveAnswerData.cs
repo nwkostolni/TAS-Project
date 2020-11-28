@@ -41,5 +41,10 @@ namespace TAS_Project.Models
             cmd.ExecuteNonQuery();
         } 
 
+        public void AddAnswers(Answer[] arrayOfAnswers){
+            for(int i=0; i<58; i++){
+                Console.WriteLine(arrayOfAnswers[i].AnsNumeric);
+            }
+        }
     }
 }

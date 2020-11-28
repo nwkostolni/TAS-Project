@@ -1,18 +1,16 @@
 login.html (Login Page)
-        connect Employee.email from database to js to html
-        connect Employee.password from database to js to html
+        COMPLETE
 
 dist -> index.html  (User Dashboard)
-        connect all database info to js points to html
+        COMPLETE
+        Connect Pie Chart to database if we have time
 
 task-list.html (Task List)
-        connect all database info to js points to html for table
-        connect all database info to js points to html for pie chart
+        COMPLETE
+        Connect Pie Chart to database if we have time
 
         survey.html (Survey)
-                configure html layout
-                configure css design
-                connect all database info to js points to html
+                make submit(post) method work
 
 admin-functions.html (Admin Functions)
         COMPLETE
@@ -24,8 +22,7 @@ admin-functions.html (Admin Functions)
                         connect all database info to js points to html
                 
                 editEmployee.html (Admin Functions >> Employees >> Edit an Employee)
-                        Make default info in form = to editId information
-                        connect all database info to js points to html
+                        COMPLETE
 
         admin-tasks.html (Admin Functions >> Tasks)
                 COMPLETE
@@ -39,6 +36,3 @@ admin-functions.html (Admin Functions)
 
 within the left menu bar >> Manged Employees
         update index2.html, index2.js, task-list2.html, and task-list2.js AFTER all changes have been made to originals
-
-Extras:
--encryption for passwords

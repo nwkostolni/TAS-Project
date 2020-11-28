@@ -5,3 +5,13 @@ $(document).ready(function() {
     "info": false
   });
 });
+
+$(document).ready(function() {
+  $('#dataTableDashboard').DataTable({
+    "paging": false,
+    "info": false,
+    "columnDefs": [
+      { "width": "65%", "targets": 0 }
+    ]
+  });
+});

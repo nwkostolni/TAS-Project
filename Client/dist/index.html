@@ -11,7 +11,7 @@
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
     </head>
-    <body class="sb-nav-fixed" onload="getUserName(); getAdmin(); getDashboard(); getTaskList(); getManagedEmployees()">
+    <body class="sb-nav-fixed" onload="getUserName(); getAdmin(); getDashboard(); getTaskList(); getManagedEmployees(); getTables(); getPieChart()">
         <script type="text/javascript" src="js/index.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -89,6 +89,8 @@
                                 </div>
                             </div>
                             <!--BEGIN Pie Chart-->
+                            <div id="hidden">
+                            </div>
                             <div class="col-lg-6">
                                 <div class="card mb-4">
                                     <div class="card-header">
@@ -105,14 +107,14 @@
                                                 data: {
                                                     labels: ["Completed", "Incomplete"],
                                                     datasets: [{
-                                                        data: [3, 2], //needs to be coded to database 
+                                                        data: [2,3],
                                                         backgroundColor: ['#28a745', '#6c757d'],
                                                     }],
                                                 },
                                             });
-                                            </script>
+                                        </script>
                                     </div>
-                                    <div class="card-footer small text-muted">Still waiting on <b>2</b> out of <b>5</b> reviews.</div> <!--needs to be coded to database--> 
+                                    <div class="card-footer small text-muted">Still waiting on <b id="incompleteMessage"></b> out of <b id="totalMessage"></b> reviews.</div> <!--needs to be coded to database--> 
                                 </div>
                             </div>
                         </div>
@@ -125,44 +127,31 @@
                         </div>
                         <!--BEGIN Collaboration Section-->
                         <div class="row">
-                            <div class="card mb-4">
-                                <div class="card-header">
-                                    <i class="fas fa-table mr-1"></i>
-                                    Collaboration
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-responsive" onload=getEmployees()>
-                                        <script type="text/javascript" src="C:\Users\hnnhp\source\repos\MIS 321\TAS-Project\Client\scripts\Employee.js"></script>
-                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                            <thead>
-                                                <tr>
-                                                    <th>Question</th>
-                                                    <th>My Response</th>
-                                                    <th>Peer's Average Response</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td id="Question"></th>
-                                                    <td id="SelfAnswer"></th>
-                                                    <td id="PeerAnswer"></th>
-                                                </tr>
-                                                <tr>
-                                                    <td>Actively contributes as a team member to achieve results</td>
-                                                    <td>4</td>
-                                                    <td>5</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Encourages collaboration among the team members</td>
-                                                    <td>5</td>
-                                                    <td>5</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                            <div class="col-lg-8">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <i class="fas fa-table mr-1"></i>
+                                        Collaboration
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered" id="dataTableDashboard" width="100%" cellspacing="0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Question</th>
+                                                        <th>My Response</th>
+                                                        <th>Peer's Average Response</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="collaboration1">
+                                                    <!--See js file for table rows.-->
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div>
+                            <div class="col-lg-4">
                                 <img class="img-align mb-4 img-error" src="C:\Users\hnnhp\source\repos\MIS 321\TAS-Project\Client\dist\assets\img\undraw_progress_data_4ebj.svg" />
                             </div>
                         </div>
@@ -173,7 +162,7 @@
                                     Collaboration
                                 </div>
                                 <div class="card-body">
-                                    <div class="table-responsive" onload=getEmployees()>
+                                    <div class="table-responsive">
                                         <script type="text/javascript" src="C:\Users\hnnhp\source\repos\MIS 321\TAS-Project\Client\scripts\Employee.js"></script>
                                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                             <thead>
@@ -182,19 +171,8 @@
                                                     <th>Various Responses</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td id="Question">What suggestions do you have to help this employee improve his/her collaboration?</th>
-                                                    <td id="Response">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."</th>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td>"Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."</td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td>"Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</td>
-                                                </tr>
+                                            <tbody id="collaboration2">
+                                                <!--See js file for table rows.-->
                                             </tbody>
                                         </table>
                                     </div>
@@ -203,43 +181,31 @@
                         </div>
                         <!--BEGIN Communication Section-->
                         <div class="row">
-                            <div>
+                            <div class="col-lg-4">
                                 <img class="img-align mb-4 img-error" src="C:\Users\hnnhp\source\repos\MIS 321\TAS-Project\Client\dist\assets\img\undraw_segment_analysis_bdn4.svg" />
                             </div>
-                            <div class="card2 mb-4">
-                                <div class="card-header">
-                                    <i class="fas fa-table mr-1"></i>
-                                    Communication
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-responsive" onload=getEmployees()>
-                                        <script type="text/javascript" src="C:\Users\hnnhp\source\repos\MIS 321\TAS-Project\Client\scripts\Employee.js"></script>
-                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                            <thead>
-                                                <tr>
-                                                    <th>Question</th>
-                                                    <th>My Response</th>
-                                                    <th>Peer's Average Response</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td id="Question"></th>
-                                                    <td id="SelfAnswer"></th>
-                                                    <td id="PeerAnswer"></th>
-                                                </tr>
-                                                <tr>
-                                                    <td>Actively contributes as a team member to achieve results</td>
-                                                    <td>4</td>
-                                                    <td>5</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Encourages collaboration among the team members</td>
-                                                    <td>5</td>
-                                                    <td>5</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                            <div class="col-lg-8">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <i class="fas fa-table mr-1"></i>
+                                        Communication
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <script type="text/javascript" src="C:\Users\hnnhp\source\repos\MIS 321\TAS-Project\Client\scripts\Employee.js"></script>
+                                            <table class="table table-bordered" id="dataTableDashboard" width="100%" cellspacing="0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Question</th>
+                                                        <th>My Response</th>
+                                                        <th>Peer's Average Response</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="communication1">
+                                                    <!--See js file for table rows.-->
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -251,7 +217,7 @@
                                     Communication
                                 </div>
                                 <div class="card-body">
-                                    <div class="table-responsive" onload=getEmployees()>
+                                    <div class="table-responsive">
                                         <script type="text/javascript" src="C:\Users\hnnhp\source\repos\MIS 321\TAS-Project\Client\scripts\Employee.js"></script>
                                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                             <thead>
@@ -260,19 +226,8 @@
                                                     <th>Various Responses</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td id="Question">What suggestions do you have to help this employee improve his/her collaboration?</th>
-                                                    <td id="Response">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."</th>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td>"Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."</td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td>"Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</td>
-                                                </tr>
+                                            <tbody id="communication2">
+                                                <!--See js file for table rows.-->
                                             </tbody>
                                         </table>
                                     </div>
@@ -281,44 +236,32 @@
                         </div>
                         <!--BEGIN Customer Focus Section-->
                         <div class="row">
-                            <div class="card mb-4">
-                                <div class="card-header">
-                                    <i class="fas fa-table mr-1"></i>
-                                    Customer Focus
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-responsive" onload=getEmployees()>
-                                        <script type="text/javascript" src="C:\Users\hnnhp\source\repos\MIS 321\TAS-Project\Client\scripts\Employee.js"></script>
-                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                            <thead>
-                                                <tr>
-                                                    <th>Question</th>
-                                                    <th>My Response</th>
-                                                    <th>Peer's Average Response</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td id="Question"></th>
-                                                    <td id="SelfAnswer"></th>
-                                                    <td id="PeerAnswer"></th>
-                                                </tr>
-                                                <tr>
-                                                    <td>Actively contributes as a team member to achieve results</td>
-                                                    <td>4</td>
-                                                    <td>5</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Encourages collaboration among the team members</td>
-                                                    <td>5</td>
-                                                    <td>5</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                            <div class="col-lg-8">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <i class="fas fa-table mr-1"></i>
+                                        Customer Focus
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <script type="text/javascript" src="C:\Users\hnnhp\source\repos\MIS 321\TAS-Project\Client\scripts\Employee.js"></script>
+                                            <table class="table table-bordered" id="dataTableDashboard" width="100%" cellspacing="0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Question</th>
+                                                        <th>My Response</th>
+                                                        <th>Peer's Average Response</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="customerfocus1">
+                                                    <!--See js file for table rows.-->
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div>
+                            <div class="col-lg-4">
                                 <img class="img-align mb-4 img-error" src="C:\Users\hnnhp\source\repos\MIS 321\TAS-Project\Client\dist\assets\img\undraw_reviews_lp8w.svg" />
                             </div>
                         </div>
@@ -329,7 +272,7 @@
                                     Customer Focus
                                 </div>
                                 <div class="card-body">
-                                    <div class="table-responsive" onload=getEmployees()>
+                                    <div class="table-responsive">
                                         <script type="text/javascript" src="C:\Users\hnnhp\source\repos\MIS 321\TAS-Project\Client\scripts\Employee.js"></script>
                                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                             <thead>
@@ -338,19 +281,8 @@
                                                     <th>Various Responses</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td id="Question">What suggestions do you have to help this employee improve his/her collaboration?</th>
-                                                    <td id="Response">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."</th>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td>"Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."</td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td>"Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</td>
-                                                </tr>
+                                            <tbody id="customerfocus2">
+                                                <!--See js file for table rows.-->
                                             </tbody>
                                         </table>
                                     </div>
@@ -359,43 +291,31 @@
                         </div>
                         <!--BEGIN Productivity Section-->
                         <div class="row">
-                            <div>
+                            <div class="col-lg-4">
                                 <img class="img-align mb-4 img-error" src="C:\Users\hnnhp\source\repos\MIS 321\TAS-Project\Client\dist\assets\img\undraw_percentages_0rur.svg" />
                             </div>
-                            <div class="card2 mb-4">
-                                <div class="card-header">
-                                    <i class="fas fa-table mr-1"></i>
-                                    Productivity
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-responsive" onload=getEmployees()>
-                                        <script type="text/javascript" src="C:\Users\hnnhp\source\repos\MIS 321\TAS-Project\Client\scripts\Employee.js"></script>
-                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                            <thead>
-                                                <tr>
-                                                    <th>Question</th>
-                                                    <th>My Response</th>
-                                                    <th>Peer's Average Response</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td id="Question"></th>
-                                                    <td id="SelfAnswer"></th>
-                                                    <td id="PeerAnswer"></th>
-                                                </tr>
-                                                <tr>
-                                                    <td>Actively contributes as a team member to achieve results</td>
-                                                    <td>4</td>
-                                                    <td>5</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Encourages collaboration among the team members</td>
-                                                    <td>5</td>
-                                                    <td>5</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                            <div class="col-lg-8">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <i class="fas fa-table mr-1"></i>
+                                        Productivity
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <script type="text/javascript" src="C:\Users\hnnhp\source\repos\MIS 321\TAS-Project\Client\scripts\Employee.js"></script>
+                                            <table class="table table-bordered" id="dataTableDashboard" width="100%" cellspacing="0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Question</th>
+                                                        <th>My Response</th>
+                                                        <th>Peer's Average Response</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="productivity1">
+                                                    <!--See js file for table rows.-->
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -407,7 +327,7 @@
                                     Productivity
                                 </div>
                                 <div class="card-body">
-                                    <div class="table-responsive" onload=getEmployees()>
+                                    <div class="table-responsive">
                                         <script type="text/javascript" src="C:\Users\hnnhp\source\repos\MIS 321\TAS-Project\Client\scripts\Employee.js"></script>
                                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                             <thead>
@@ -416,19 +336,8 @@
                                                     <th>Various Responses</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td id="Question">What suggestions do you have to help this employee improve his/her collaboration?</th>
-                                                    <td id="Response">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."</th>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td>"Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."</td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td>"Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</td>
-                                                </tr>
+                                            <tbody id="productivity2">
+                                                <!--See js file for table rows.-->
                                             </tbody>
                                         </table>
                                     </div>
@@ -437,45 +346,33 @@
                         </div>
                         <!--BEGIN Integrity Section-->
                         <div class="row">
-                            <div class="card mb-4">
-                                <div class="card-header">
-                                    <i class="fas fa-table mr-1"></i>
-                                    Integrity
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-responsive" onload=getEmployees()>
-                                        <script type="text/javascript" src="C:\Users\hnnhp\source\repos\MIS 321\TAS-Project\Client\scripts\Employee.js"></script>
-                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                            <thead>
-                                                <tr>
-                                                    <th>Question</th>
-                                                    <th>My Response</th>
-                                                    <th>Peer's Average Response</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td id="Question"></th>
-                                                    <td id="SelfAnswer"></th>
-                                                    <td id="PeerAnswer"></th>
-                                                </tr>
-                                                <tr>
-                                                    <td>Actively contributes as a team member to achieve results</td>
-                                                    <td>4</td>
-                                                    <td>5</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Encourages collaboration among the team members</td>
-                                                    <td>5</td>
-                                                    <td>5</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                            <div class="col-lg-8">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <i class="fas fa-table mr-1"></i>
+                                        Integrity
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <script type="text/javascript" src="C:\Users\hnnhp\source\repos\MIS 321\TAS-Project\Client\scripts\Employee.js"></script>
+                                            <table class="table table-bordered" id="dataTableDashboard" width="100%" cellspacing="0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Question</th>
+                                                        <th>My Response</th>
+                                                        <th>Peer's Average Response</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="integrity1">
+                                                    <!--See js file for table rows.-->
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div>
-                                <img class="img-align mb-4 img-error" src="C:\Users\hnnhp\source\repos\MIS 321\TAS-Project\Client\dist\assets\img\undraw_reviews_lp8w.svg" />
+                            <div class="col-lg-4">
+                                <img class="img-align mb-4 img-error" src="C:\Users\hnnhp\source\repos\MIS 321\TAS-Project\Client\dist\assets\img\undraw_notes1_cf55.svg" />
                             </div>
                         </div>
                         <div class="row">
@@ -485,7 +382,7 @@
                                     Integrity
                                 </div>
                                 <div class="card-body">
-                                    <div class="table-responsive" onload=getEmployees()>
+                                    <div class="table-responsive">
                                         <script type="text/javascript" src="C:\Users\hnnhp\source\repos\MIS 321\TAS-Project\Client\scripts\Employee.js"></script>
                                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                             <thead>
@@ -494,19 +391,8 @@
                                                     <th>Various Responses</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td id="Question">What suggestions do you have to help this employee improve his/her collaboration?</th>
-                                                    <td id="Response">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."</th>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td>"Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."</td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td>"Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</td>
-                                                </tr>
+                                            <tbody id="integrity2">
+                                                <!--See js file for table rows.-->
                                             </tbody>
                                         </table>
                                     </div>
@@ -515,43 +401,31 @@
                         </div>
                         <!--BEGIN Problem Solving Section-->
                         <div class="row">
-                            <div>
+                            <div class="col-lg-4">
                                 <img class="img-align mb-4 img-error" src="C:\Users\hnnhp\source\repos\MIS 321\TAS-Project\Client\dist\assets\img\undraw_stepping_up_g6oo.svg" />
                             </div>
-                            <div class="card2 mb-4">
-                                <div class="card-header">
-                                    <i class="fas fa-table mr-1"></i>
-                                    Problem Solving
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-responsive" onload=getEmployees()>
-                                        <script type="text/javascript" src="C:\Users\hnnhp\source\repos\MIS 321\TAS-Project\Client\scripts\Employee.js"></script>
-                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                            <thead>
-                                                <tr>
-                                                    <th>Question</th>
-                                                    <th>My Response</th>
-                                                    <th>Peer's Average Response</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td id="Question"></th>
-                                                    <td id="SelfAnswer"></th>
-                                                    <td id="PeerAnswer"></th>
-                                                </tr>
-                                                <tr>
-                                                    <td>Actively contributes as a team member to achieve results</td>
-                                                    <td>4</td>
-                                                    <td>5</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Encourages collaboration among the team members</td>
-                                                    <td>5</td>
-                                                    <td>5</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                            <div class="col-lg-8">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <i class="fas fa-table mr-1"></i>
+                                        Problem Solving
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <script type="text/javascript" src="C:\Users\hnnhp\source\repos\MIS 321\TAS-Project\Client\scripts\Employee.js"></script>
+                                            <table class="table table-bordered" id="dataTableDashboard" width="100%" cellspacing="0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Question</th>
+                                                        <th>My Response</th>
+                                                        <th>Peer's Average Response</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="problemsolving1">
+                                                    <!--See js file for table rows.-->
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -563,7 +437,7 @@
                                     Problem Solving
                                 </div>
                                 <div class="card-body">
-                                    <div class="table-responsive" onload=getEmployees()>
+                                    <div class="table-responsive">
                                         <script type="text/javascript" src="C:\Users\hnnhp\source\repos\MIS 321\TAS-Project\Client\scripts\Employee.js"></script>
                                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                             <thead>
@@ -572,19 +446,8 @@
                                                     <th>Various Responses</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td id="Question">What suggestions do you have to help this employee improve his/her collaboration?</th>
-                                                    <td id="Response">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."</th>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td>"Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."</td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td>"Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</td>
-                                                </tr>
+                                            <tbody id="problemsolving2">
+                                                <!--See js file for table rows.-->
                                             </tbody>
                                         </table>
                                     </div>
@@ -593,44 +456,32 @@
                         </div>
                         <!--BEGIN Self Leadership Section-->
                         <div class="row">
-                            <div class="card mb-4">
-                                <div class="card-header">
-                                    <i class="fas fa-table mr-1"></i>
-                                    Self Leadership
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-responsive" onload=getEmployees()>
-                                        <script type="text/javascript" src="C:\Users\hnnhp\source\repos\MIS 321\TAS-Project\Client\scripts\Employee.js"></script>
-                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                            <thead>
-                                                <tr>
-                                                    <th>Question</th>
-                                                    <th>My Response</th>
-                                                    <th>Peer's Average Response</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td id="Question"></th>
-                                                    <td id="SelfAnswer"></th>
-                                                    <td id="PeerAnswer"></th>
-                                                </tr>
-                                                <tr>
-                                                    <td>Actively contributes as a team member to achieve results</td>
-                                                    <td>4</td>
-                                                    <td>5</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Encourages collaboration among the team members</td>
-                                                    <td>5</td>
-                                                    <td>5</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                            <div class="col-lg-8">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <i class="fas fa-table mr-1"></i>
+                                        Self Leadership
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <script type="text/javascript" src="C:\Users\hnnhp\source\repos\MIS 321\TAS-Project\Client\scripts\Employee.js"></script>
+                                            <table class="table table-bordered" id="dataTableDashboard" width="100%" cellspacing="0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Question</th>
+                                                        <th>My Response</th>
+                                                        <th>Peer's Average Response</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="selfleadership1">
+                                                    <!--See js file for table rows.-->
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div>
+                            <div class="col-lg-4">
                                 <img class="img-align mb-4 img-error" src="C:\Users\hnnhp\source\repos\MIS 321\TAS-Project\Client\dist\assets\img\undraw_statistic_chart_38b6.svg" />
                             </div>
                         </div>
@@ -641,7 +492,7 @@
                                     Self Leadership
                                 </div>
                                 <div class="card-body">
-                                    <div class="table-responsive" onload=getEmployees()>
+                                    <div class="table-responsive">
                                         <script type="text/javascript" src="C:\Users\hnnhp\source\repos\MIS 321\TAS-Project\Client\scripts\Employee.js"></script>
                                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                             <thead>
@@ -650,19 +501,8 @@
                                                     <th>Various Responses</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td id="Question">What suggestions do you have to help this employee improve his/her collaboration?</th>
-                                                    <td id="Response">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."</th>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td>"Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."</td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td>"Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</td>
-                                                </tr>
+                                            <tbody id="selfleadership2">
+                                                <!--See js file for table rows.-->
                                             </tbody>
                                         </table>
                                     </div>
@@ -682,7 +522,7 @@
                                     Final Questions
                                 </div>
                                 <div class="card-body">
-                                    <div class="table-responsive" onload=getEmployees()>
+                                    <div class="table-responsive">
                                         <script type="text/javascript" src="C:\Users\hnnhp\source\repos\MIS 321\TAS-Project\Client\scripts\Employee.js"></script>
                                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                             <thead>
@@ -691,27 +531,8 @@
                                                     <th>Various Responses</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td id="Question">What do you value most about working with this person?</th>
-                                                    <td id="Response">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."</th>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td>"Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."</td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td>"Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>What would make this person more effective in their job?</td>
-                                                    <td>"Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."</td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td>"Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</td>
-                                                </tr>
+                                            <tbody id="finalquestions">
+                                                <!--See js file for table rows.-->
                                             </tbody>
                                         </table>
                                     </div>
@@ -745,3 +566,4 @@
         <script src="assets/demo/datatables-demo.js"></script>
     </body>
 </html>
+
