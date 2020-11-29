@@ -166,8 +166,7 @@ function getGlobalAnsId(){
 }
 
 function saveResponses(){
-    //THIS SECTION COMMENTED OUT UNTIL POST METHOD IS WORKING
-    /* var answerResponses = [];
+    var answerResponses = [];
     var i=0;
     var x =document.getElementsByName("openEnded");
     var flip = false;
@@ -183,71 +182,111 @@ function saveResponses(){
                 break;
             }
             answerResponses[i] = {
-                ansId: globalAnsId,
-                ansNumeric: null,
-                ansText: document.getElementById("a"+i).value,
-                surveyId: surveyId,
-                inputChoiceId: 6,
-                qstId: (i+1)
+                AnsId: (parseInt(globalAnsId)+i),
+                AnsNumeric: null,
+                AnsText: document.getElementById("a"+i).value,
+                SurveyId: parseInt(surveyId),
+                InputChoiceId: 6,
+                QstId: (i+1)
             };
             i++;
             flip=false;
-            globalAnsId+=1;
         }
         else{
             if(document.querySelector('input[name=a'+i+']:checked') ==null){
                 alert("Please answer all questions before submitting.");
                 break;
             }
+            var first =document.querySelector('input[name=a'+i+']:checked').value;
+            var second = parseInt(first);
             answerResponses[i] = {
-            ansId: globalAnsId,
-            ansNumeric: document.querySelector('input[name=a'+i+']:checked').value,
-            ansText: null,
-            surveyId: surveyId,
-            inputChoiceId: document.querySelector('input[name=a'+i+']:checked').value,
-            qstId: (i+1)
+            AnsId: (parseInt(globalAnsId)+i),
+            AnsNumeric: second,
+            AnsText: null,
+            SurveyId: parseInt(surveyId),
+            InputChoiceId: second,
+            QstId: (i+1)
             };
             i++;
-            globalAnsId+=1;
         }
-    } */
+    }
+    saveResponses2(answerResponses);
+} 
+function saveResponses2(answerResponses){
+    answerResponses.forEach(element => {
+        const allAnswersApiUrl = "https://localhost:5001/api/Answer";
+        fetch(allAnswersApiUrl, {
+            method: "POST",
+            headers: {
+                "Accept": 'application/json',
+                "Content-Type": 'application/json'
+            },
+            body: JSON.stringify({
+                AnsId: element.AnsId,
+                AnsNumeric: element.AnsNumeric,
+                AnsText: element.AnsText,
+                SurveyId: element.SurveyId,
+                InputChoiceId: element.InputChoiceId,
+                QstId: element.QstId
+            })
+        })
+        .then((response)=>{
+            console.log(response);
+            if(element.QstId==58){
+                completeSurvey();
+            }
+        });
+    })
+}
 
+function completeSurvey(){
+    const allSurveysApiUrl = "https://localhost:5001/api/Survey";
 
+    fetch(allSurveysApiUrl).then(function(response){
+        console.log(response);
+        return response.json();
+    }).then(function(json){
+        json.forEach((Survey)=>{
+            if(Survey.surveyId==surveyId){
+                const SurveyId = Survey.surveyId;
+                const SurveyCycle = Survey.cycle;
+                const SurveyReviewerId= Survey.reviewerEmpId;
+                const SurveySubjectId= Survey.subjectEmpId;
+                var SurveyDateDue= new Date(Survey.dateCompleted).toJSON();
 
-    //Temporary array code to reduce errors until the post method is running.
-    var answerResponses = []; 
-    answerResponses[0] = {
-        AnsId: globalAnsId,
-        AnsNumeric: 7,
-        AnsText: "hello",
-        SurveyId: surveyId,
-        InputChoiceId: 7,
-        QstId: 1
-        };
-        answerResponses[1] = {
-            AnsId: globalAnsId,
-            AnsNumeric: 8,
-            AnsText: "hola",
-            SurveyId: surveyId,
-            InputChoiceId: 7,
-            QstId: 1
-        };
+                const SurveyBeenCompleted = new Boolean(true);
 
+                var SurveyDateCompleted = new Date().toJSON();
 
-    const allAnswersApiUrl = "https://localhost:5001/api/Answer";
+                completeSurvey2(SurveyId, SurveyCycle, SurveyReviewerId, SurveySubjectId, SurveyDateDue, SurveyBeenCompleted, SurveyDateCompleted);
+            }
+        })
+    }).catch(function(error){
+        console.log(error);
+    });
+}
 
-    fetch(allAnswersApiUrl, {
-        method: "POST",
+function completeSurvey2(SurveyId, SurveyCycle, SurveyReviewerId, SurveySubjectId, SurveyDateDue, SurveyBeenCompleted, SurveyDateCompleted){
+    const editSurveyApiUrl="https://localhost:5001/api/Survey";
+
+    fetch(editSurveyApiUrl, {
+        method: "PUT", 
         headers: {
             "Accept": 'application/json',
             "Content-Type": 'application/json'
         },
         body: JSON.stringify({
-            methodParam: answerResponses
+            surveyId: SurveyId,
+            cycle: SurveyCycle,
+            reviewerEmpId: SurveyReviewerId,
+            subjectEmpId: SurveySubjectId,
+            dateDue: SurveyDateDue,
+            beenCompleted: SurveyBeenCompleted,
+            dateCompleted: SurveyDateCompleted
         })
     })
     .then((response)=>{
         console.log(response);
-        alert("made it to then in .js");
+        window.location.href = "task-list.html?userId="+userId;
     })
 }

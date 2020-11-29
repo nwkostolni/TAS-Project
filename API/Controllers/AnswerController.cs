@@ -36,11 +36,8 @@ namespace api.Controllers
         [HttpPost]
         public void Post([FromBody] Answer value)
         {
-            Console.WriteLine("top of POST");
-  
-                ISaveAnswerData insertObject = new SaveAnswerData();
-                insertObject.UpdateAnswer(value);
-
+            ISaveAnswerData insertObject = new SaveAnswerData();
+            insertObject.UpdateAnswer(value);
         }
 
         // PUT: api/Answer/5

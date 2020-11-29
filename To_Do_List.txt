@@ -10,7 +10,7 @@ task-list.html (Task List)
         Connect Pie Chart to database if we have time
 
         survey.html (Survey)
-                make submit(post) method work
+                COMPLETE
 
 admin-functions.html (Admin Functions)
         COMPLETE
@@ -34,4 +34,4 @@ admin-functions.html (Admin Functions)
                         COMPLETE
 
 within the left menu bar >> Manged Employees
-        update index2.html, index2.js, task-list2.html, and task-list2.js AFTER all changes have been made to originals
+        COMPLETE

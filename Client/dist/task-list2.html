@@ -1,2 +1,161 @@
-<!--Once all changes are finished on task-list.html, copy and paste all of it into here. Then make 2 changes: add "managedEmployeeAlert()" to the
-onload functions and change the .js reference to task-list2.js-->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>My Tasks</title> <!--This is the page title displayed on the tab-->
+        <link href="css/styles.css" rel="stylesheet" />
+        <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
+    </head>
+    <body class="sb-nav-fixed" onload="getUserName(); getAdmin(); getDashboard(); getTaskList(); getManagedEmployees(); getSurveys(); getSubjectName(); managedEmployeeAlert()">
+        <script type="text/javascript" src="js/task-list2.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+            <a class="navbar-brand" href="index.html" id="userName"></a> 
+            <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
+            <!-- Navbar Search-->
+            <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+                <div>
+                    <img class="navbar-brand" id="TAS-logo-rectangle" src ="C:\Users\hnnhp\source\repos\MIS 321\TAS-Project\Client\dist\assets\img\Rectangular TAS Logo.png" alt="TAS Company Logo">
+                </div>
+            </form>
+            <!-- Navbar-->
+            <ul class="navbar-nav ml-auto ml-md-0">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                        <div id="adminPriv">
+                            <!--Option for if Admin Functions shows. See js file for paths.-->
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="login.html">Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+        <div id="layoutSidenav"> <!--SideBar Menu-->
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                    <div class="sb-sidenav-menu">
+                        <div class="nav">
+                            <div class="sb-sidenav-menu-heading">User</div>
+                            <div id="dashboard">
+                                <!--User Dashboard. See js file for paths.-->
+                            </div>
+                            <div class="sb-sidenav-menu-heading">Surveys</div>
+                            <div id="taskList">
+                                <!--Task List. See js file for paths.-->
+                            </div>
+                            <div class="sb-sidenav-menu-heading">Managed Employees</div>
+                            <div id="managedEmployees">
+                                <!--Managed Employees section. See js file for paths.-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sb-sidenav-footer">
+                        <div class="small">Logged in as:</div>
+                        <div id="userName2"></div>
+                    </div>
+                </nav>
+            </div>
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid">
+                        <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+                            <div>
+                                <h1 class="mt-4">Assigned Tasks</h1> 
+                            </div>
+                        </form>
+                        <img class="mb-4 img-error img-icon" src="C:\Users\hnnhp\source\repos\MIS 321\TAS-Project\Client\dist\assets\img\undraw_accept_request_vdsd.svg" />
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item active">My Assigned Surveys</li><!--Gray box for smaller text at top-->
+                        </ol>
+                        <div class="row">
+                            <p class="card-body body">Use this page to keep track of reviews that you need to complete. The Assigned Surveys chart will help you to keep track of which surveys you have done and which surveys are remaining for each review cycle. Reviews will automatically be removed from this chart at the end of each review cycle. Click on an employee name on the table below to complete their review:</p>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="card mb-4"> 
+                                    <div class="card-header">
+                                        <i class="fas fa-table mr-1"></i>
+                                        Assigned Surveys
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive" onload=getEmployees()>
+                                            <script type="text/javascript" src="C:\Users\hnnhp\source\repos\MIS 321\TAS-Project\Client\scripts\Employee.js"></script>
+                                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Due Date</th>
+                                                        <th>Employee to Review</th>
+                                                        <th>Go To Survey</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="surveyTable">
+                                                    <!--This section targeted by js.-->
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <i class="fas fa-chart-pie mr-1"></i>
+                                        My Progress
+                                    </div>
+                                    <div class="card-body">
+                                        <script type="canvas" src="js/Chart.js"></script>
+                                        <canvas id="myPieChartTasks" width="100%" height="50"></canvas>
+                                        <script>
+                                            var ctx = document.getElementById("myPieChartTasks");
+                                            var myPieChart = new Chart(ctx, {
+                                                type: 'pie',
+                                                data: {
+                                                    labels: ["Completed", "Incomplete"],
+                                                    datasets: [{
+                                                        data: [1, 2], //needs to be coded to database 
+                                                        backgroundColor: ['#28a745', '#6c757d'],
+                                                    }],
+                                                },
+                                            });
+                                        </script>
+                                    </div>
+                                    <div class="card-footer small text-muted">Still need to complete <b>2</b> out of <b>3</b> surveys.</div> <!--needs to be coded to database -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+                <footer class="py-4 bg-light mt-auto">
+                    <div class="container-fluid">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div class="text-muted">Copyright &copy; TAS 360 Feedback Program 2020</div>
+                            <div>
+                                <a href="privacy-policy.txt">Privacy Policy</a>
+                                &middot;
+                                <a href="terms-and-conditions.txt">Terms &amp; Conditions</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="js/scripts.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+        <script src="assets/demo/chart-area-demo.js"></script>
+        <script src="assets/demo/chart-bar-demo.js"></script>
+        <script src="assets/demo/chart-pie-demo.js"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+        <script src="assets/demo/datatables-demo.js"></script>
+    </body>
+</html>

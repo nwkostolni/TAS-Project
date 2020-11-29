@@ -27,8 +27,6 @@ namespace TAS_Project.Models
             con.Open(); //opens a connection to the database
              
             using var cmd= new SQLiteCommand(con);
-  
-            
        
             cmd.CommandText=@"INSERT INTO Answer(AnswerId, AnswerNumeric, AnswerText, SurveyId, InputChoiceId, QuestionId) VALUES(@AnswerId, @AnswerNumeric, @AnswerText, @SurveyId, @InputChoiceId, @QuestionId)";
             cmd.Parameters.AddWithValue("@AnswerId", value.AnsId); 
@@ -40,11 +38,5 @@ namespace TAS_Project.Models
             cmd.Prepare();
             cmd.ExecuteNonQuery();
         } 
-
-        public void AddAnswers(Answer[] arrayOfAnswers){
-            for(int i=0; i<58; i++){
-                Console.WriteLine(arrayOfAnswers[i].AnsNumeric);
-            }
-        }
     }
 }
