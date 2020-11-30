@@ -252,7 +252,7 @@ function completeSurvey(){
                 const SurveyCycle = Survey.cycle;
                 const SurveyReviewerId= Survey.reviewerEmpId;
                 const SurveySubjectId= Survey.subjectEmpId;
-                var SurveyDateDue= new Date(Survey.dateCompleted).toJSON();
+                var SurveyDateDue= new Date(Survey.dateDue).toJSON();
 
                 const SurveyBeenCompleted = new Boolean(true);
 
