@@ -143,7 +143,8 @@ function editSurvey1(){
 
                     const SurveyBeenCompleted = Survey.beenCompleted;
 
-                    var SurveyDateCompleted = new Date(Survey.dateCompleted).toJSON();
+                    var SurveyDateCompleted = Survey.dateCompleted ?
+                    new Date(Survey.dateCompleted).toJSON() : null
 
                     editSurvey2(SurveyId, SurveyCycle, SurveyReviewerId, SurveySubjectId, SurveyDateDue, SurveyBeenCompleted, SurveyDateCompleted);
                 }
